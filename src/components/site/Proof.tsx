@@ -56,7 +56,7 @@ export function Proof() {
             <span className="eyebrow text-kerala">Admitted through Quilon</span>
             <p className="mt-2 font-display text-[clamp(2.6rem,7vw,5.5rem)] font-extrabold leading-[0.9] tracking-tight text-brown">
               1000+ admissions
-              <span className="block text-kerala">guided since 2014</span>
+              <span className="block text-kerala">admissions since 2012</span>
             </p>
           </div>
           <div className="ml-auto w-full max-w-xs text-blur-strip rounded-sm px-6 py-5">
