@@ -247,10 +247,10 @@ function ContactPage() {
                         9497 771 392
                       </a>
                       <a
-                        href="tel:+919207774402"
+                        href="tel:+919207774401"
                         className="block text-sm font-semibold text-brown hover:text-gold"
                       >
-                        9207 774 402
+                        9207 774 401
                       </a>
                     </div>
                   </div>

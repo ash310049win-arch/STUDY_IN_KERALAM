@@ -4,6 +4,7 @@ import { Nav } from "@/components/site/Nav";
 import { Hero } from "@/components/site/Hero";
 import { WhyUs } from "@/components/site/WhyUs";
 import { Process } from "@/components/site/Process";
+import { PartnerInstitutions } from "@/components/site/PartnerInstitutions";
 import { DistrictMap } from "@/components/site/DistrictMap";
 import { Proof } from "@/components/site/Proof";
 import { FinalCta } from "@/components/site/FinalCta";
@@ -33,6 +34,7 @@ function Index() {
         <Hero />
         <WhyUs />
         <Process />
+        <PartnerInstitutions />
         <DistrictMap />
         <Proof />
         <FinalCta />

@@ -56,8 +56,8 @@ export function Footer() {
                   9497 771 392
                 </a>
                 {" / "}
-                <a href="tel:+919207774402" className="hover:text-gold">
-                  9207 774 402
+                <a href="tel:+919207774401" className="hover:text-gold">
+                  9207 774 401
                 </a>
               </li>
               <li>
