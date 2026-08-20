@@ -15,7 +15,7 @@ const reviews = [
   { quote: "Pathanamthitta colleges are limited. They found me a spot in the aided quota.", name: "Gopika R.", college: "N.S.S. College Pandalam", district: "Pathanamthitta" },
   { quote: "Refund rules confused us. They explained what we'd get back before we paid.", name: "Aishwarya N.", college: "Govt Law College Trivandrum", district: "Thiruvananthapuram" },
   { quote: "Idukki to Ernakulam felt like another country. They confirmed transport and hostel.", name: "Midhun P.", college: "Rajagiri College of Engineering", district: "Idukki" },
-  { quote: "Reservation category docs needed翻译 — they guided my parents through everything.", name: "Sana M.", college: "Farook College Kozhikode", district: "Kozhikode" },
+  { quote: "Reservation category docs needed — they guided my parents through everything.", name: "Sana M.", college: "Farook College Kozhikode", district: "Kozhikode" },
   { quote: "IIT was a dream. They filed parallel applications so no year was lost.", name: "Vishnu S.", college: "IIT Palakkad", district: "Palakkad" },
 ];
 
@@ -40,7 +40,7 @@ export function Proof() {
   }, [scroll]);
 
   return (
-    <section id="proof" className="bg-offwhite pb-20 sm:pb-28">
+    <section id="proof" className="bg-offwhite pb-12 sm:pb-16">
       {/* Stats on photo */}
       <div className="relative isolate">
         <img
@@ -84,23 +84,23 @@ export function Proof() {
         ref={trackRef}
         onMouseEnter={() => setIsPaused(true)}
         onMouseLeave={() => setIsPaused(false)}
-        className="flex gap-4 overflow-x-auto scroll-smooth px-5 pb-4 pt-2 sm:px-8"
+        className="flex gap-5 overflow-x-auto scroll-smooth px-5 pb-4 pt-2 sm:px-8"
         style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
       >
         {reviews.map((r, i) => (
           <blockquote
             key={i}
-            className="flex w-[280px] shrink-0 flex-col justify-between rounded-lg border border-hairline bg-ivory p-5"
+            className="flex w-[340px] shrink-0 flex-col justify-between rounded-xl border border-hairline bg-ivory p-6 sm:p-7"
           >
-            <p className="text-sm leading-relaxed text-brown">
+            <p className="text-[15px] leading-relaxed text-brown">
               "{r.quote}"
             </p>
-            <footer className="mt-4 border-t border-hairline pt-3">
-              <p className="text-xs font-bold text-brown">{r.name}</p>
-              <p className="text-[11px] text-muted-foreground">
+            <footer className="mt-5 border-t border-hairline pt-4">
+              <p className="text-sm font-bold text-brown">{r.name}</p>
+              <p className="mt-0.5 text-xs text-muted-foreground">
                 {r.college}
               </p>
-              <p className="mt-0.5 text-[10px] font-semibold uppercase tracking-wider text-kerala">
+              <p className="mt-1 text-[10px] font-semibold uppercase tracking-wider text-kerala">
                 {r.district}
               </p>
             </footer>
