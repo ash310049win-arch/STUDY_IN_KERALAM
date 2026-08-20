@@ -2,6 +2,7 @@ import { useState } from "react";
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { Nav } from "@/components/site/Nav";
 import { Footer } from "@/components/site/Footer";
+import { sendContact } from "@/server-fns/mail";
 
 export const Route = createFileRoute("/contact")({
   head: () => ({
@@ -40,16 +41,10 @@ function ContactPage() {
     setError("");
 
     try {
-      const res = await fetch("/api/send-contact", {
-        method: "POST",
-        headers: { "content-type": "application/json" },
-        body: JSON.stringify(formData),
-      });
+      const { error } = await sendContact({ data: formData });
 
-      const data = await res.json();
-
-      if (!res.ok || data.error) {
-        throw new Error(data.error || "Something went wrong.");
+      if (error) {
+        throw new Error(error.message || "Something went wrong.");
       }
 
       setSubmitted(true);

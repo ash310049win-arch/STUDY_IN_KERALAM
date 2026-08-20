@@ -2,6 +2,7 @@ import { useState } from "react";
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { Nav } from "@/components/site/Nav";
 import { Footer } from "@/components/site/Footer";
+import { sendConsultation } from "@/server-fns/mail";
 import bgImg from "@/assets/hero-consultation.jpg";
 
 const districts = [
@@ -115,20 +116,16 @@ function BookConsultationPage() {
     setError("");
 
     try {
-      const res = await fetch("/api/send-consultation", {
-        method: "POST",
-        headers: { "content-type": "application/json" },
-        body: JSON.stringify({
+      const { error } = await sendConsultation({
+        data: {
           ...formData,
           districts: selectedDistricts,
           fields: selectedFields,
-        }),
+        },
       });
 
-      const data = await res.json();
-
-      if (!res.ok || data.error) {
-        throw new Error(data.error || "Something went wrong.");
+      if (error) {
+        throw new Error(error.message || "Something went wrong.");
       }
 
       setSubmitted(true);
