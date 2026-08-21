@@ -2,10 +2,10 @@ import { useEffect, useState } from "react";
 import { Link } from "@tanstack/react-router";
 
 const links = [
-  { hash: "#why", label: "Why Quilon" },
-  { hash: "#process", label: "Process" },
-  { hash: "#districts", label: "Districts" },
-  { hash: "#proof", label: "Results" },
+  { hash: "why", label: "Why Quilon" },
+  { hash: "process", label: "Process" },
+  { hash: "districts", label: "Districts" },
+  { hash: "proof", label: "Results" },
 ];
 
 export function Nav() {
@@ -60,9 +60,7 @@ export function Nav() {
         <Link
           to="/book-consultation"
           className={`ml-auto inline-flex items-center rounded-full px-5 py-2.5 text-sm font-bold shadow-sm transition-all duration-300 md:ml-0 ${
-            scrolled
-              ? "bg-brown text-offwhite hover:bg-ink"
-              : "bg-gold text-ink hover:bg-gold/90"
+            scrolled ? "bg-brown text-offwhite hover:bg-ink" : "bg-gold text-ink hover:bg-gold/90"
           }`}
         >
           Talk to an advisor
