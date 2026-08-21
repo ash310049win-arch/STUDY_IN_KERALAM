@@ -97,12 +97,15 @@ export function Footer() {
             <Link to="/book-consultation" className="hover:text-gold">
               Contact us
             </Link>
-            <a href="#top" className="hover:text-gold">
+            <Link to="/privacy" className="hover:text-gold">
               Privacy
-            </a>
-            <a href="#top" className="hover:text-gold">
+            </Link>
+            <Link to="/terms" className="hover:text-gold">
               Terms
-            </a>
+            </Link>
+            <Link to="/refund" className="hover:text-gold">
+              Refund
+            </Link>
           </div>
         </div>
       </div>
