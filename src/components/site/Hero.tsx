@@ -47,7 +47,7 @@ export function Hero() {
           {[
             ["1000+", "admissions guided"],
             ["180+", "Kerala institutions"],
-            ["12 yrs", "in Kollam"],
+            ["14 yrs", "in Kollam"],
           ].map(([n, label]) => (
             <div key={label}>
               <dt className="font-display text-2xl font-extrabold text-offwhite sm:text-3xl">

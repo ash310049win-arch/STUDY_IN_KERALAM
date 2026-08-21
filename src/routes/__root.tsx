@@ -4,6 +4,7 @@ import {
   Link,
   createRootRouteWithContext,
   useRouter,
+  useLocation,
   HeadContent,
   Scripts,
 } from "@tanstack/react-router";
@@ -11,6 +12,7 @@ import { useEffect, type ReactNode } from "react";
 
 import appCss from "../styles.css?url";
 import { reportLovableError } from "../lib/lovable-error-reporting";
+import "../chatbot";
 
 function NotFoundComponent() {
   return (
@@ -110,9 +112,41 @@ function RootShell({ children }: { children: ReactNode }) {
   return (
     <html lang="en">
       <head>
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f)})(window,document,'script','dataLayer','GTM-NGT3FPFS');`,
+          }}
+        />
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-QNLME5EVXG" />
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-QNLME5EVXG');`,
+          }}
+        />
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');fbq('init','3083751408488450');fbq('track','PageView');`,
+          }}
+        />
         <HeadContent />
       </head>
       <body>
+        <noscript>
+          <iframe
+            src="https://www.googletagmanager.com/ns.html?id=GTM-NGT3FPFS"
+            height="0"
+            width="0"
+            style={{ display: "none", visibility: "hidden" }}
+          />
+        </noscript>
+        <noscript>
+          <img
+            height="1"
+            width="1"
+            style={{ display: "none" }}
+            src="https://www.facebook.com/tr?id=3083751408488450&ev=PageView&noscript=1"
+          />
+        </noscript>
         {children}
         <Scripts />
       </body>
@@ -122,6 +156,27 @@ function RootShell({ children }: { children: ReactNode }) {
 
 function RootComponent() {
   const { queryClient } = Route.useRouteContext();
+  const location = useLocation();
+
+  useEffect(() => {
+    window.__agentive_widget_active = true;
+  }, []);
+
+  // Fire Meta Pixel PageView on SPA route changes
+  useEffect(() => {
+    const fbq = (window as any).fbq;
+    if (typeof fbq === "function") {
+      fbq("track", "PageView");
+    }
+  }, [location.pathname]);
+
+  // Fire GA4 page_view on SPA route changes
+  useEffect(() => {
+    const gtag = (window as any).gtag;
+    if (typeof gtag === "function") {
+      gtag("event", "page_view", { page_path: location.pathname });
+    }
+  }, [location.pathname]);
 
   return (
     <QueryClientProvider client={queryClient}>
