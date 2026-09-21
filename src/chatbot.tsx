@@ -168,6 +168,9 @@ declare global {
       effectiveUid = data.uid;
       sessionId = localStorage.getItem(sessionKey()) || null;
       config = data;
+      // Match the host site's brand color (dark brown) instead of the widget
+      // theme configured on the backend (#f43f5e default).
+      config.theme_color = "#4d3a2c";
       showPrechat = config.require_user_info && !hasCompleteSavedProfile(loadSavedProfile(), config.required_fields || {});
       injectStyles();
       render();
