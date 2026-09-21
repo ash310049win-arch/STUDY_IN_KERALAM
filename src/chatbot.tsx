@@ -2,7 +2,7 @@
 declare global {
   interface Window {
     __agentive_widget_active?: boolean;
-    __agentive_widget_cmoccoceo000404l1x3zw8t1z?: boolean;
+    __agentive_widget_adc015b4b4b87891bbb5f1e9?: boolean;
   }
 }
 
@@ -19,13 +19,13 @@ declare global {
   // false on route-change/unmount, so a late-loading embed never initialises on
   // the wrong page. Undefined for normal third-party embeds -> always runs.
   if (window.__agentive_widget_active === false) return;
-  if (window.__agentive_widget_cmoccoceo000404l1x3zw8t1z) return;
-  window.__agentive_widget_cmoccoceo000404l1x3zw8t1z = true;
+  if (window.__agentive_widget_adc015b4b4b87891bbb5f1e9) return;
+  window.__agentive_widget_adc015b4b4b87891bbb5f1e9 = true;
 
   // Widget config (normally read from the <script> tag's data attributes)
-  var WIDGET_UID = "cmoccoceo000404l1x3zw8t1z";
+  var WIDGET_UID = "adc015b4b4b87891bbb5f1e9";
   var WIDGET_ID = "";
-  var API_BASE = "https://app.agentive.co.in";
+  var API_BASE = "https://myappzbackend.com/functions/v1/chat-widget-public";
   if ((!WIDGET_UID && !WIDGET_ID) || !API_BASE) return;
 
   var effectiveUid = WIDGET_UID || "";
