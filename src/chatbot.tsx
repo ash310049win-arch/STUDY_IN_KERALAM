@@ -35,6 +35,17 @@ declare global {
   function profileKey() { return "chat_profile_" + effectiveUid; }
   var EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
+  // Brand gold used by the host site (tailwind --gold). Resolves the actual CSS
+  // custom property so the widget follows the site's theme; falls back to the
+  // hex equivalent of oklch(0.74 0.095 82).
+  function resolveSiteGold() {
+    try {
+      var v = getComputedStyle(document.documentElement).getPropertyValue("--gold").trim();
+      if (v && v.indexOf("var(") !== 0) return v;
+    } catch (e) { /* fall through */ }
+    return "#c9a562";
+  }
+
   function loadSavedProfile() {
     try {
       var raw = localStorage.getItem(profileKey());
@@ -168,9 +179,10 @@ declare global {
       effectiveUid = data.uid;
       sessionId = localStorage.getItem(sessionKey()) || null;
       config = data;
-      // Match the host site's brand color (dark brown) instead of the widget
-      // theme configured on the backend (#f43f5e default).
-      config.theme_color = "#4d3a2c";
+      // Match the host site's brand theme: gold accent with brown text. Read
+      // --gold from the site CSS (falls back to a hex approximation), overriding
+      // the widget theme configured on the backend (#f43f5e default).
+      config.theme_color = resolveSiteGold();
       showPrechat = config.require_user_info && !hasCompleteSavedProfile(loadSavedProfile(), config.required_fields || {});
       injectStyles();
       render();
@@ -221,24 +233,24 @@ declare global {
     var style = document.createElement("style");
     style.textContent = [
       ".cw-root{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;position:fixed;z-index:999999;bottom:20px;" + (config.position === "bottom-left" ? "left:20px" : "right:20px") + ";color:" + T.text + ";text-align:left}",
-      ".cw-fab{width:56px;height:56px;border-radius:28px;border:none;cursor:pointer;color:#fff;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 12px rgba(0,0,0,.25);transition:transform .2s}",
+      ".cw-fab{width:56px;height:56px;border-radius:28px;border:none;cursor:pointer;color:#4d3a2c;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 12px rgba(0,0,0,.25);transition:transform .2s}",
       ".cw-fab:hover{transform:scale(1.1)}",
       ".cw-fab svg{width:24px;height:24px}",
       ".cw-box{width:380px;height:520px;border-radius:16px;overflow:hidden;display:flex;flex-direction:column;background:" + T.panel + ";color:" + T.text + ";box-shadow:0 8px 30px rgba(0,0,0,.18);animation:cwSlideUp .25s ease}",
       "@keyframes cwSlideUp{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}",
-      ".cw-header{padding:14px 16px;color:#fff;display:flex;align-items:center;justify-content:space-between}",
+      ".cw-header{padding:14px 16px;color:#4d3a2c;display:flex;align-items:center;justify-content:space-between}",
       ".cw-header-info{display:flex;align-items:center;gap:10px;min-width:0}",
-      ".cw-avatar{width:36px;height:36px;border-radius:18px;background:rgba(255,255,255,.2);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:14px;flex-shrink:0;overflow:hidden}",
+      ".cw-avatar{width:36px;height:36px;border-radius:18px;background:rgba(77,58,44,.12);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:14px;flex-shrink:0;overflow:hidden}",
       ".cw-avatar img{width:100%;height:100%;object-fit:cover}",
       ".cw-name{font-size:14px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}",
       ".cw-status{font-size:11px;opacity:.8;display:flex;align-items:center;gap:4px}",
       ".cw-dot{width:6px;height:6px;border-radius:3px}",
-      ".cw-close{background:none;border:none;color:#fff;cursor:pointer;padding:6px;border-radius:50%;display:flex}",
-      ".cw-close:hover{background:rgba(255,255,255,.15)}",
+      ".cw-close{background:none;border:none;color:#4d3a2c;cursor:pointer;padding:6px;border-radius:50%;display:flex}",
+      ".cw-close:hover{background:rgba(77,58,44,.15)}",
       ".cw-messages{flex:1;overflow-y:auto;padding:16px;display:flex;flex-direction:column;gap:10px;background:" + T.msgArea + "}",
       ".cw-msg{max-width:80%;padding:10px 14px;border-radius:14px;font-size:13px;line-height:1.45;word-wrap:break-word}",
       ".cw-msg-bot{background:" + T.panel + ";color:" + T.text + ";border:1px solid " + T.border + ";align-self:flex-start;border-bottom-left-radius:4px}",
-      ".cw-msg-user{color:#fff;align-self:flex-end;border-bottom-right-radius:4px}",
+      ".cw-msg-user{color:#4d3a2c;align-self:flex-end;border-bottom-right-radius:4px}",
       ".cw-msg-time{font-size:10px;opacity:.5;margin-top:4px}",
       ".cw-btns{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}",
       ".cw-btn{font-size:11px;padding:4px 10px;border-radius:20px;border:1px solid " + T.border + ";background:" + T.panel + ";color:" + T.text + ";cursor:pointer;transition:background .15s}",
@@ -247,13 +259,13 @@ declare global {
       ".cw-input{flex:1;border:1px solid " + T.border + ";border-radius:8px;padding:8px 12px;font-size:13px;outline:none;color:" + T.text + ";background:" + T.inputBg + "}",
       ".cw-input::placeholder,.cw-prechat input::placeholder{color:" + T.placeholder + "}",
       ".cw-input:focus{border-color:" + config.theme_color + "}",
-      ".cw-send{width:36px;height:36px;border-radius:8px;border:none;color:#fff;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0}",
+      ".cw-send{width:36px;height:36px;border-radius:8px;border:none;color:#4d3a2c;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0}",
       ".cw-send:disabled{opacity:.5;cursor:default}",
       ".cw-prechat{padding:16px;display:flex;flex-direction:column;gap:10px}",
       ".cw-prechat label{font-size:12px;color:" + T.label + ";display:block;margin-bottom:2px}",
       ".cw-prechat input{width:100%;box-sizing:border-box;border:1px solid " + T.border + ";border-radius:8px;padding:8px 10px;font-size:13px;outline:none;color:" + T.text + ";background:" + T.inputBg + "}",
       ".cw-prechat input:focus{border-color:" + config.theme_color + "}",
-      ".cw-prechat-btn{width:100%;padding:10px;border:none;border-radius:8px;color:#fff;font-size:14px;font-weight:600;cursor:pointer;margin-top:4px}",
+      ".cw-prechat-btn{width:100%;padding:10px;border:none;border-radius:8px;color:#4d3a2c;font-size:14px;font-weight:600;cursor:pointer;margin-top:4px}",
       ".cw-prechat-err{font-size:11px;color:#ef4444;margin-top:2px}",
       ".cw-typing{display:flex;gap:4px;padding:10px 14px;align-self:flex-start}",
       ".cw-typing span{width:6px;height:6px;border-radius:3px;background:" + T.typingDot + ";animation:cwBounce .6s infinite alternate}",
