@@ -16,19 +16,22 @@ import "../chatbot";
 
 function NotFoundComponent() {
   return (
-    <div className="flex min-h-screen items-center justify-center bg-background px-4">
-      <div className="max-w-md text-center">
-        <h1 className="text-7xl font-bold text-foreground">404</h1>
-        <h2 className="mt-4 text-xl font-semibold text-foreground">Page not found</h2>
-        <p className="mt-2 text-sm text-muted-foreground">
-          The page you're looking for doesn't exist or has been moved.
+    <div className="flex min-h-dvh items-center bg-paper px-5">
+      <div className="mx-auto w-full max-w-3xl">
+        <p className="font-mal text-2xl text-ochre">വഴി തെറ്റി</p>
+        <h1 className="mt-4 text-[clamp(3rem,9vw,6.5rem)]">
+          This page took a <em className="italic text-ochre">wrong turn.</em>
+        </h1>
+        <p className="mt-6 max-w-md text-base leading-relaxed">
+          The link may be old, or the page has moved. Everything we do still starts from the home
+          page.
         </p>
-        <div className="mt-6">
-          <Link
-            to="/"
-            className="inline-flex items-center justify-center rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground transition-colors hover:bg-primary/90"
-          >
-            Go home
+        <div className="mt-10 flex flex-wrap items-center gap-6">
+          <Link to="/" className="btn btn-primary">
+            Back to home
+          </Link>
+          <Link to="/book-consultation" className="link-underline text-sm font-semibold text-brown">
+            Book a free consultation
           </Link>
         </div>
       </div>
@@ -92,7 +95,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { rel: "preconnect", href: "https://fonts.gstatic.com", crossOrigin: "anonymous" },
       {
         rel: "stylesheet",
-        href: "https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700;800&family=Manrope:wght@400;500;600;700&display=swap",
+        href: "https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght,SOFT@0,9..144,300..700,0..100;1,9..144,300..700,0..100&family=Instrument+Sans:wght@400..700&family=Noto+Serif+Malayalam:wght@400;600&display=swap",
       },
       { rel: "icon", href: "/favicon.ico", type: "image/x-icon" },
       { rel: "icon", href: "/icon0.svg", type: "image/svg+xml" },
@@ -110,7 +113,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
 
 function RootShell({ children }: { children: ReactNode }) {
   return (
-    <html lang="en">
+    <html lang="en-IN">
       <head>
         <script
           dangerouslySetInnerHTML={{

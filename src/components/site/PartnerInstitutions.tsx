@@ -130,159 +130,183 @@ const partners = [
   },
 ];
 
-const VISIBLE_PROGRAM_COUNT = 7;
+type Partner = (typeof partners)[number];
 
-function ProgramPill({ label }: { label: string }) {
+function ProgramList({ programs }: { programs: string[] }) {
   return (
-    <span className="inline-block max-w-full rounded-full border border-gold px-3 py-1 text-xs font-semibold leading-snug tracking-wide text-gold">
-      {label}
-    </span>
+    <ul className="columns-1 gap-10 text-[0.95rem] leading-snug sm:columns-2 lg:columns-3">
+      {programs.map((p) => (
+        <li key={p} className="mb-2.5 flex break-inside-avoid gap-3">
+          <span
+            aria-hidden="true"
+            className="mt-[0.55em] h-px w-3 shrink-0 bg-current opacity-40"
+          />
+          {p}
+        </li>
+      ))}
+    </ul>
   );
 }
 
-function PartnerBadge() {
-  return (
-    <span className="inline-flex items-center gap-1.5 rounded-sm bg-kerala px-2.5 py-1 text-[0.625rem] font-bold uppercase tracking-widest text-offwhite">
-      <span className="inline-block size-1.5 rounded-full bg-gold" />
-      Partner Institution
-    </span>
-  );
-}
-
-function PartnerCard({
-  partner,
-  className = "",
-}: {
-  partner: (typeof partners)[number];
-  className?: string;
-}) {
-  const isFeature = partner.feature;
+function FeaturePartner({ partner }: { partner: Partner }) {
   const [expanded, setExpanded] = useState(false);
-  const visiblePrograms =
-    partner.programs.length > VISIBLE_PROGRAM_COUNT && !expanded
-      ? partner.programs.slice(0, VISIBLE_PROGRAM_COUNT)
-      : partner.programs;
-  const hiddenCount = partner.programs.length - VISIBLE_PROGRAM_COUNT;
-
+  const shown = expanded ? partner.programs : partner.programs.slice(0, 9);
   return (
-    <article
-      className={`relative flex min-w-0 flex-col rounded-sm border border-hairline bg-offwhite ${
-        isFeature ? "border-l-[3px] border-l-gold p-7 sm:p-9" : "p-5 sm:p-6"
-      } ${className}`}
-    >
-      <PartnerBadge />
-
-      <h3
-        className={`mt-4 font-display font-extrabold leading-tight text-brown ${
-          isFeature ? "text-[clamp(1.4rem,2.5vw,2rem)]" : "text-[clamp(1rem,1.6vw,1.25rem)]"
-        }`}
+    <article className="reveal relative overflow-hidden rounded-[2rem] bg-brown p-7 text-offwhite/80 sm:p-12">
+      <span
+        aria-hidden="true"
+        className="pointer-events-none absolute -right-6 -top-10 font-mal text-[11rem] leading-none text-offwhite/[0.04] sm:text-[16rem]"
       >
-        {partner.name}
-      </h3>
-
-      {partner.subtitle && (
-        <p className="mt-1 text-sm font-semibold text-gold">{partner.subtitle}</p>
-      )}
-
-      <p className="mt-1 text-sm text-muted-foreground">{partner.location}</p>
-
-      {partner.note && (
-        <p className="mt-3 text-sm leading-relaxed text-muted-foreground">{partner.note}</p>
-      )}
-
-      {partner.stat && (
-        <div className="mt-4 flex items-baseline gap-2">
-          <span className="font-display text-3xl font-extrabold text-gold">
-            {partner.stat.value}
-          </span>
-          <span className="text-sm text-muted-foreground">{partner.stat.label}</span>
+        വി
+      </span>
+      <div className="relative grid gap-10 lg:grid-cols-[0.9fr_1.1fr] lg:gap-16">
+        <div>
+          <p className="text-xs font-semibold text-gold">Featured partner · {partner.subtitle}</p>
+          <h3 className="mt-4 text-[clamp(2rem,3.6vw,3rem)] text-offwhite">{partner.name}</h3>
+          <p className="mt-2 text-sm">{partner.location}</p>
+          {partner.note && (
+            <p className="mt-6 max-w-md text-base leading-relaxed">{partner.note}</p>
+          )}
+          {partner.stat && (
+            <p className="mt-8 flex items-baseline gap-3 border-t border-offwhite/15 pt-6">
+              <span className="tnum font-display text-5xl text-gold">{partner.stat.value}</span>
+              <span className="text-sm">{partner.stat.label}</span>
+            </p>
+          )}
         </div>
-      )}
-
-      <div className="pt-5">
-        <p className="mb-2.5 text-[0.6875rem] font-bold uppercase tracking-widest text-gold">
-          Flagship programs
-        </p>
-        <div className="flex min-w-0 flex-wrap gap-2">
-          {visiblePrograms.map((p) => (
-            <ProgramPill key={p} label={p} />
-          ))}
-        </div>
-        {partner.programs.length > VISIBLE_PROGRAM_COUNT && (
-          <button
-            type="button"
-            onClick={() => setExpanded((v) => !v)}
-            aria-expanded={expanded}
-            className="mt-3 inline-flex items-center gap-1.5 text-[0.6875rem] font-bold uppercase tracking-widest text-gold transition-colors hover:text-brown focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold"
-          >
-            {expanded
-              ? "Show fewer"
-              : `Show all ${partner.programs.length} programs (+${hiddenCount})`}
-            <svg
-              className={`size-3.5 transition-transform ${expanded ? "rotate-180" : ""}`}
-              viewBox="0 0 16 16"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2"
-              strokeLinecap="round"
-              strokeLinejoin="round"
+        <div>
+          <p className="mb-5 text-xs font-semibold text-offwhite/60">
+            {partner.programs.length} programmes
+          </p>
+          <ul className="grid gap-x-8 text-[0.95rem] sm:grid-cols-2">
+            {shown.map((p) => (
+              <li key={p} className="border-b border-offwhite/10 py-2.5 text-offwhite/90">
+                {p}
+              </li>
+            ))}
+          </ul>
+          {partner.programs.length > 9 && (
+            <button
+              type="button"
+              onClick={() => setExpanded((v) => !v)}
+              aria-expanded={expanded}
+              className="link-underline mt-5 text-sm font-semibold text-gold"
             >
-              <path d="M4 6l4 4 4-4" />
-            </svg>
-          </button>
-        )}
+              {expanded ? "Show fewer" : `Show all ${partner.programs.length} programmes`}
+            </button>
+          )}
+        </div>
       </div>
     </article>
   );
 }
 
-export function PartnerInstitutions() {
+function PartnerRow({ partner, index }: { partner: Partner; index: number }) {
+  const [open, setOpen] = useState(false);
+  const id = `partner-${index}`;
   return (
-    <section id="partners" className="bg-ivory py-20 sm:py-28">
-      <div className="mx-auto max-w-7xl px-5 sm:px-8">
-        {/* ── Header ── */}
-        <div className="max-w-2xl">
-          <span className="eyebrow flex items-center gap-3 text-kerala">
-            <span className="gold-rule" />
-            Our network
+    <li className="border-b border-hairline">
+      <button
+        type="button"
+        onClick={() => setOpen((v) => !v)}
+        aria-expanded={open}
+        aria-controls={id}
+        className="group grid w-full grid-cols-[1fr_auto] items-center gap-x-6 gap-y-1 py-7 text-left sm:grid-cols-[3rem_1fr_auto_auto] sm:py-8"
+      >
+        <span className="tnum hidden text-sm text-muted-foreground sm:block">
+          {String(index + 1).padStart(2, "0")}
+        </span>
+        <span>
+          <span className="block font-display text-[clamp(1.4rem,2.6vw,2.1rem)] leading-tight text-brown transition-colors group-hover:text-ochre">
+            {partner.name}
           </span>
-          <h2 className="mt-5 text-[clamp(2rem,4vw,3.4rem)]">Our Partner Institutions</h2>
-          <p className="mt-4 max-w-xl text-base leading-relaxed text-muted-foreground sm:text-lg">
-            The colleges we work with directly to get Kerala students admitted
+          <span className="mt-1 block text-sm">{partner.location}</span>
+        </span>
+        <span className="tnum hidden text-sm text-muted-foreground sm:block">
+          {partner.programs.length} programmes
+        </span>
+        <span
+          aria-hidden="true"
+          className={`flex size-10 items-center justify-center rounded-full border border-hairline text-brown transition-[transform,background-color] duration-300 group-hover:bg-paper-deep ${
+            open ? "rotate-45" : ""
+          }`}
+        >
+          <svg
+            viewBox="0 0 16 16"
+            className="size-3.5"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="1.5"
+          >
+            <path d="M8 2v12M2 8h12" />
+          </svg>
+        </span>
+      </button>
+      <div
+        id={id}
+        className={`grid transition-[grid-template-rows] duration-500 ease-out ${
+          open ? "grid-rows-[1fr]" : "grid-rows-[0fr]"
+        }`}
+      >
+        <div className="overflow-hidden">
+          <div className="pb-10 sm:pl-[4.5rem]">
+            {(partner.note || partner.stat) && (
+              <p className="mb-6 max-w-2xl text-sm leading-relaxed text-brown">
+                {partner.stat && (
+                  <strong className="font-semibold">
+                    {partner.stat.value} {partner.stat.label}.{" "}
+                  </strong>
+                )}
+                {partner.note}
+              </p>
+            )}
+            <ProgramList programs={partner.programs} />
+          </div>
+        </div>
+      </div>
+    </li>
+  );
+}
+
+export function PartnerInstitutions() {
+  const [feature, ...rest] = partners;
+  return (
+    <section id="partners" className="py-24 sm:py-32">
+      <div className="mx-auto max-w-[1320px] px-5 sm:px-8">
+        <div className="grid gap-8 lg:grid-cols-[1fr_auto] lg:items-end">
+          <div className="max-w-3xl">
+            <p className="eyebrow flex items-center gap-3 text-ochre">
+              <span className="gold-rule" />
+              Partner colleges
+            </p>
+            <h2 className="reveal mt-6 text-[clamp(2.3rem,4.8vw,4.2rem)]">
+              Colleges we work with <em className="font-light italic text-ochre">directly.</em>
+            </h2>
+          </div>
+          <p className="max-w-xs text-sm leading-relaxed">
+            A direct line to the admission office means faster answers on seats, fees and hostel —
+            for you, not for us.
           </p>
         </div>
 
-        {/*
-         * Card grid: 1 col (mobile) / 2 cols (tablet) / 3 equal cols (desktop).
-         * CSS Grid sizes every track identically, so no card can exceed its
-         * column; min-w-0 on each card lets long program pills wrap instead
-         * of pushing the grid wider than the container. Cards keep natural
-         * heights while stretch alignment keeps same-row cards level.
-         */}
-        <div className="mt-12 grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-3">
-          {partners.map((p) => (
-            <PartnerCard key={p.name} partner={p} />
-          ))}
+        <div className="mt-16">
+          <FeaturePartner partner={feature!} />
         </div>
 
-        {/* ── CTA ── */}
-        <div className="mt-14 flex justify-center">
-          <Link
-            to="/book-consultation"
-            className="inline-flex items-center gap-2 rounded-sm bg-brown px-8 py-3.5 text-sm font-bold uppercase tracking-widest text-offwhite transition-colors hover:bg-gold hover:text-ink focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold"
-          >
+        <ul className="mt-6 border-t border-hairline">
+          {rest.map((p, i) => (
+            <PartnerRow key={p.name} partner={p} index={i} />
+          ))}
+        </ul>
+
+        <div className="mt-14 flex flex-wrap items-center justify-between gap-6">
+          <p className="max-w-md text-sm">
+            Looking at a college that isn't listed? We guide admissions to 180+ institutions across
+            Kerala.
+          </p>
+          <Link to="/book-consultation" className="btn btn-primary">
             Apply through Quilon
-            <svg
-              className="size-4"
-              viewBox="0 0 16 16"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            >
-              <path d="M3 8h10M9 4l4 4-4 4" />
-            </svg>
+            <span aria-hidden="true">→</span>
           </Link>
         </div>
       </div>

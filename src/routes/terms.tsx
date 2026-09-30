@@ -20,13 +20,13 @@ function TermsPage() {
   return (
     <div className="min-h-screen bg-ivory">
       <Nav />
-      <main className="pt-28 pb-20 sm:pt-36 sm:pb-28">
+      <main id="main" className="pt-28 pb-20 sm:pt-36 sm:pb-28">
         <div className="mx-auto max-w-3xl px-5 sm:px-8">
-          <span className="eyebrow flex items-center gap-3 text-kerala">
+          <span className="eyebrow flex items-center gap-3 text-ochre">
             <span className="gold-rule" />
             Legal
           </span>
-          <h1 className="mt-5 text-[clamp(2rem,4vw,3.4rem)] text-brown">
+          <h1 className="mt-5 text-[clamp(2.6rem,5vw,4.4rem)]">
             Terms and Conditions
           </h1>
           <p className="mt-3 text-sm text-muted-foreground">
@@ -41,7 +41,7 @@ function TermsPage() {
 
             {/* 1 */}
             <section>
-              <h2 className="mb-3 font-display text-lg font-extrabold text-brown">
+              <h2 className="mb-3 font-display text-2xl text-brown">
                 1. About Our Services
               </h2>
               <p>
@@ -55,7 +55,7 @@ function TermsPage() {
 
             {/* 2 */}
             <section>
-              <h2 className="mb-3 font-display text-lg font-extrabold text-brown">
+              <h2 className="mb-3 font-display text-2xl text-brown">
                 2. No Guarantee of Admission or Visa Approval
               </h2>
               <p>
@@ -72,7 +72,7 @@ function TermsPage() {
 
             {/* 3 */}
             <section>
-              <h2 className="mb-3 font-display text-lg font-extrabold text-brown">
+              <h2 className="mb-3 font-display text-2xl text-brown">
                 3. Information Accuracy
               </h2>
               <p>
@@ -90,7 +90,7 @@ function TermsPage() {
 
             {/* 4 */}
             <section>
-              <h2 className="mb-3 font-display text-lg font-extrabold text-brown">
+              <h2 className="mb-3 font-display text-2xl text-brown">
                 4. Career Matcher Tool
               </h2>
               <p>
@@ -105,7 +105,7 @@ function TermsPage() {
 
             {/* 5 */}
             <section>
-              <h2 className="mb-3 font-display text-lg font-extrabold text-brown">
+              <h2 className="mb-3 font-display text-2xl text-brown">
                 5. User Conduct
               </h2>
               <p className="mb-3">
@@ -122,7 +122,7 @@ function TermsPage() {
 
             {/* 6 */}
             <section>
-              <h2 className="mb-3 font-display text-lg font-extrabold text-brown">
+              <h2 className="mb-3 font-display text-2xl text-brown">
                 6. Fees and Services
               </h2>
               <p>
@@ -130,7 +130,7 @@ function TermsPage() {
                 directly to you by our counselors and are not published on this
                 Site unless stated otherwise. Any fees paid for our services
                 are subject to our separate{" "}
-                <Link to="/refund" className="font-semibold text-kerala hover:text-gold">
+                <Link to="/refund" className="font-semibold text-brown underline decoration-gold underline-offset-4 hover:text-ochre">
                   Refund Policy
                 </Link>
                 .
@@ -139,7 +139,7 @@ function TermsPage() {
 
             {/* 7 */}
             <section>
-              <h2 className="mb-3 font-display text-lg font-extrabold text-brown">
+              <h2 className="mb-3 font-display text-2xl text-brown">
                 7. Intellectual Property
               </h2>
               <p>
@@ -152,7 +152,7 @@ function TermsPage() {
 
             {/* 8 */}
             <section>
-              <h2 className="mb-3 font-display text-lg font-extrabold text-brown">
+              <h2 className="mb-3 font-display text-2xl text-brown">
                 8. Limitation of Liability
               </h2>
               <p>
@@ -166,7 +166,7 @@ function TermsPage() {
 
             {/* 9 */}
             <section>
-              <h2 className="mb-3 font-display text-lg font-extrabold text-brown">
+              <h2 className="mb-3 font-display text-2xl text-brown">
                 9. Third-Party Links
               </h2>
               <p>
@@ -179,7 +179,7 @@ function TermsPage() {
 
             {/* 10 */}
             <section>
-              <h2 className="mb-3 font-display text-lg font-extrabold text-brown">
+              <h2 className="mb-3 font-display text-2xl text-brown">
                 10. Governing Law
               </h2>
               <p>
@@ -191,7 +191,7 @@ function TermsPage() {
 
             {/* 11 */}
             <section>
-              <h2 className="mb-3 font-display text-lg font-extrabold text-brown">
+              <h2 className="mb-3 font-display text-2xl text-brown">
                 11. Changes to These Terms
               </h2>
               <p>
@@ -203,7 +203,7 @@ function TermsPage() {
 
             {/* 12 */}
             <section>
-              <h2 className="mb-3 font-display text-lg font-extrabold text-brown">
+              <h2 className="mb-3 font-display text-2xl text-brown">
                 12. Contact Us
               </h2>
               <div className="mt-2 rounded-lg border border-hairline bg-offwhite p-5">
@@ -218,7 +218,7 @@ function TermsPage() {
                   Email:{" "}
                   <a
                     href="mailto:info@quilonconsultancy.com"
-                    className="font-semibold text-kerala hover:text-gold"
+                    className="font-semibold text-brown underline decoration-gold underline-offset-4 hover:text-ochre"
                   >
                     info@quilonconsultancy.com
                   </a>
@@ -227,14 +227,14 @@ function TermsPage() {
                   Phone:{" "}
                   <a
                     href="tel:+919497771392"
-                    className="font-semibold text-kerala hover:text-gold"
+                    className="font-semibold text-brown underline decoration-gold underline-offset-4 hover:text-ochre"
                   >
                     +91 94977 71392
                   </a>{" "}
                   /{" "}
                   <a
                     href="tel:+919207774401"
-                    className="font-semibold text-kerala hover:text-gold"
+                    className="font-semibold text-brown underline decoration-gold underline-offset-4 hover:text-ochre"
                   >
                     +91 92077 74401
                   </a>

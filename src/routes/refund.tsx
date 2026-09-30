@@ -20,13 +20,13 @@ function RefundPage() {
   return (
     <div className="min-h-screen bg-ivory">
       <Nav />
-      <main className="pt-28 pb-20 sm:pt-36 sm:pb-28">
+      <main id="main" className="pt-28 pb-20 sm:pt-36 sm:pb-28">
         <div className="mx-auto max-w-3xl px-5 sm:px-8">
-          <span className="eyebrow flex items-center gap-3 text-kerala">
+          <span className="eyebrow flex items-center gap-3 text-ochre">
             <span className="gold-rule" />
             Legal
           </span>
-          <h1 className="mt-5 text-[clamp(2rem,4vw,3.4rem)] text-brown">
+          <h1 className="mt-5 text-[clamp(2.6rem,5vw,4.4rem)]">
             Refund Policy
           </h1>
           <p className="mt-3 text-sm text-muted-foreground">
@@ -41,7 +41,7 @@ function RefundPage() {
 
             {/* 1 */}
             <section>
-              <h2 className="mb-3 font-display text-lg font-extrabold text-brown">
+              <h2 className="mb-3 font-display text-2xl text-brown">
                 1. Free Consultation
               </h2>
               <p>
@@ -53,7 +53,7 @@ function RefundPage() {
 
             {/* 2 */}
             <section>
-              <h2 className="mb-3 font-display text-lg font-extrabold text-brown">
+              <h2 className="mb-3 font-display text-2xl text-brown">
                 2. Service Fees
               </h2>
               <p>
@@ -68,7 +68,7 @@ function RefundPage() {
 
             {/* 3 */}
             <section>
-              <h2 className="mb-3 font-display text-lg font-extrabold text-brown">
+              <h2 className="mb-3 font-display text-2xl text-brown">
                 3. General Refund Principles
               </h2>
               <ul className="list-disc space-y-2 pl-5">
@@ -88,7 +88,7 @@ function RefundPage() {
                   Refund requests should be submitted in writing to{" "}
                   <a
                     href="mailto:info@quilonconsultancy.com"
-                    className="font-semibold text-kerala hover:text-gold"
+                    className="font-semibold text-brown underline decoration-gold underline-offset-4 hover:text-ochre"
                   >
                     info@quilonconsultancy.com
                   </a>
@@ -99,7 +99,7 @@ function RefundPage() {
 
             {/* 4 */}
             <section>
-              <h2 className="mb-3 font-display text-lg font-extrabold text-brown">
+              <h2 className="mb-3 font-display text-2xl text-brown">
                 4. Processing Time
               </h2>
               <p>
@@ -111,7 +111,7 @@ function RefundPage() {
 
             {/* 5 */}
             <section>
-              <h2 className="mb-3 font-display text-lg font-extrabold text-brown">
+              <h2 className="mb-3 font-display text-2xl text-brown">
                 5. Non-Refundable Circumstances
               </h2>
               <p className="mb-3">
@@ -135,7 +135,7 @@ function RefundPage() {
 
             {/* 6 */}
             <section>
-              <h2 className="mb-3 font-display text-lg font-extrabold text-brown">
+              <h2 className="mb-3 font-display text-2xl text-brown">
                 6. Contact for Refund Requests
               </h2>
               <p>
@@ -149,7 +149,7 @@ function RefundPage() {
                   Email:{" "}
                   <a
                     href="mailto:info@quilonconsultancy.com"
-                    className="font-semibold text-kerala hover:text-gold"
+                    className="font-semibold text-brown underline decoration-gold underline-offset-4 hover:text-ochre"
                   >
                     info@quilonconsultancy.com
                   </a>
@@ -158,14 +158,14 @@ function RefundPage() {
                   Phone:{" "}
                   <a
                     href="tel:+919497771392"
-                    className="font-semibold text-kerala hover:text-gold"
+                    className="font-semibold text-brown underline decoration-gold underline-offset-4 hover:text-ochre"
                   >
                     +91 94977 71392
                   </a>{" "}
                   /{" "}
                   <a
                     href="tel:+919207774401"
-                    className="font-semibold text-kerala hover:text-gold"
+                    className="font-semibold text-brown underline decoration-gold underline-offset-4 hover:text-ochre"
                   >
                     +91 92077 74401
                   </a>

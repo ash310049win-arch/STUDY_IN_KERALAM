@@ -11,7 +11,7 @@ export const Route = createFileRoute("/contact")({
       {
         name: "description",
         content:
-          "Get in touch with Quilon Educational Consultancy. Free consultation for Kerala college admissions — call, email, or visit our branches in Kottarakara or Trivandrum.",
+          "Get in touch with Quilon Educational Consultancy. Free consultation for Kerala college admissions — call, email, or visit our branches in Kottarakara, Kollam, Trivandrum or Adimali.",
       },
     ],
   }),
@@ -29,9 +29,7 @@ function ContactPage() {
     message: "",
   });
 
-  const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
-  ) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     setFormData((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   };
 
@@ -49,11 +47,7 @@ function ContactPage() {
 
       setSubmitted(true);
     } catch (err) {
-      setError(
-        err instanceof Error
-          ? err.message
-          : "Failed to send. Please try again or call us.",
-      );
+      setError(err instanceof Error ? err.message : "Failed to send. Please try again or call us.");
     } finally {
       setLoading(false);
     }
@@ -62,21 +56,20 @@ function ContactPage() {
   return (
     <div className="min-h-screen bg-ivory">
       <Nav />
-      <main className="pt-28 pb-20 sm:pt-36 sm:pb-28">
-        <div className="mx-auto max-w-7xl px-5 sm:px-8">
+      <main id="main" className="pt-28 pb-20 sm:pt-36 sm:pb-28">
+        <div className="mx-auto max-w-[1320px] px-5 sm:px-8">
           {/* Header */}
           <div className="max-w-2xl">
-            <span className="eyebrow flex items-center gap-3 text-kerala">
+            <span className="eyebrow flex items-center gap-3 text-ochre">
               <span className="gold-rule" />
               Get in touch
             </span>
-            <h1 className="mt-5 text-[clamp(2rem,4vw,3.4rem)] text-brown">
-              Talk to an advisor.
+            <h1 className="mt-6 text-[clamp(2.6rem,5vw,4.4rem)]">
+              Talk to an <em className="font-light italic text-ochre">advisor.</em>
             </h1>
             <p className="mt-4 text-sm leading-relaxed text-muted-foreground sm:text-base">
-              Free consultation — no obligation, no fee until you decide to go
-              ahead. We'll tell you exactly where you stand and what happens
-              next.
+              Free consultation — no obligation, no fee until you decide to go ahead. We'll tell you
+              exactly where you stand and what happens next.
             </p>
           </div>
 
@@ -84,17 +77,15 @@ function ContactPage() {
             {/* Form */}
             <div>
               {submitted ? (
-                <div className="rounded-2xl border border-kerala/30 bg-kerala/5 p-10 text-center">
-                  <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-kerala/10">
-                    <span className="text-2xl text-kerala">&#10003;</span>
-                  </div>
-                  <p className="mt-5 font-display text-xl font-extrabold text-brown">
-                    Message sent
-                  </p>
+                <div className="rounded-[2rem] bg-offwhite p-10 text-center">
+                  <p className="font-mal text-2xl text-ochre">നന്ദി</p>
+                  <p className="mt-4 font-display text-3xl text-brown">Message sent.</p>
                   <p className="mt-3 text-sm text-muted-foreground">
-                    We'll get back to you within one working day. You can also
-                    call us at{" "}
-                    <a href="tel:+919497771392" className="font-semibold text-brown hover:text-gold">
+                    We'll get back to you within one working day. You can also call us at{" "}
+                    <a
+                      href="tel:+919497771392"
+                      className="font-semibold text-brown hover:text-gold"
+                    >
                       9497 771 392
                     </a>
                     .
@@ -102,7 +93,7 @@ function ContactPage() {
                   <button
                     type="button"
                     onClick={() => setSubmitted(false)}
-                    className="mt-6 rounded-full border border-hairline px-6 py-2.5 text-sm font-bold text-brown transition-colors hover:border-gold hover:text-gold"
+                    className="btn mt-6 border border-hairline text-brown hover:bg-paper-deep"
                   >
                     Send another message
                   </button>
@@ -110,14 +101,11 @@ function ContactPage() {
               ) : (
                 <form
                   onSubmit={handleSubmit}
-                  className="rounded-2xl border border-hairline bg-offwhite p-8 sm:p-10"
+                  className="rounded-[2rem] bg-offwhite p-6 shadow-[0_30px_60px_-40px_oklch(0.3_0.042_52/0.45)] sm:p-10"
                 >
                   <div className="grid gap-5 sm:grid-cols-2">
                     <div>
-                      <label
-                        htmlFor="name"
-                        className="mb-1.5 block text-xs font-bold uppercase tracking-[0.12em] text-muted-foreground"
-                      >
+                      <label htmlFor="name" className="mb-2 block text-sm font-semibold text-brown">
                         Name
                       </label>
                       <input
@@ -128,13 +116,13 @@ function ContactPage() {
                         value={formData.name}
                         onChange={handleChange}
                         placeholder="Your full name"
-                        className="w-full rounded-lg border border-hairline bg-ivory px-4 py-3 text-sm text-brown outline-none transition-colors focus:border-gold focus:ring-1 focus:ring-gold/30"
+                        className="w-full rounded-xl border border-hairline bg-paper/60 px-4 py-3.5 text-[0.95rem] text-brown outline-none transition-[border-color,background-color,box-shadow] placeholder:text-muted-foreground/60 hover:border-brown/30 focus:border-brown focus:bg-offwhite focus:ring-4 focus:ring-gold/25"
                       />
                     </div>
                     <div>
                       <label
                         htmlFor="email"
-                        className="mb-1.5 block text-xs font-bold uppercase tracking-[0.12em] text-muted-foreground"
+                        className="mb-2 block text-sm font-semibold text-brown"
                       >
                         Email
                       </label>
@@ -146,15 +134,12 @@ function ContactPage() {
                         value={formData.email}
                         onChange={handleChange}
                         placeholder="you@example.com"
-                        className="w-full rounded-lg border border-hairline bg-ivory px-4 py-3 text-sm text-brown outline-none transition-colors focus:border-gold focus:ring-1 focus:ring-gold/30"
+                        className="w-full rounded-xl border border-hairline bg-paper/60 px-4 py-3.5 text-[0.95rem] text-brown outline-none transition-[border-color,background-color,box-shadow] placeholder:text-muted-foreground/60 hover:border-brown/30 focus:border-brown focus:bg-offwhite focus:ring-4 focus:ring-gold/25"
                       />
                     </div>
                   </div>
                   <div className="mt-5">
-                    <label
-                      htmlFor="phone"
-                      className="mb-1.5 block text-xs font-bold uppercase tracking-[0.12em] text-muted-foreground"
-                    >
+                    <label htmlFor="phone" className="mb-2 block text-sm font-semibold text-brown">
                       Phone
                     </label>
                     <input
@@ -164,13 +149,13 @@ function ContactPage() {
                       value={formData.phone}
                       onChange={handleChange}
                       placeholder="Optional"
-                      className="w-full rounded-lg border border-hairline bg-ivory px-4 py-3 text-sm text-brown outline-none transition-colors focus:border-gold focus:ring-1 focus:ring-gold/30"
+                      className="w-full rounded-xl border border-hairline bg-paper/60 px-4 py-3.5 text-[0.95rem] text-brown outline-none transition-[border-color,background-color,box-shadow] placeholder:text-muted-foreground/60 hover:border-brown/30 focus:border-brown focus:bg-offwhite focus:ring-4 focus:ring-gold/25"
                     />
                   </div>
                   <div className="mt-5">
                     <label
                       htmlFor="message"
-                      className="mb-1.5 block text-xs font-bold uppercase tracking-[0.12em] text-muted-foreground"
+                      className="mb-2 block text-sm font-semibold text-brown"
                     >
                       Message
                     </label>
@@ -182,12 +167,15 @@ function ContactPage() {
                       value={formData.message}
                       onChange={handleChange}
                       placeholder="Tell us which district, course, or exam you need help with..."
-                      className="w-full resize-none rounded-lg border border-hairline bg-ivory px-4 py-3 text-sm text-brown outline-none transition-colors focus:border-gold focus:ring-1 focus:ring-gold/30"
+                      className="w-full resize-none rounded-xl border border-hairline bg-ivory px-4 py-3 text-sm text-brown outline-none transition-colors focus:border-gold focus:ring-1 focus:ring-gold/30"
                     />
                   </div>
 
                   {error && (
-                    <div className="mt-4 rounded-lg border border-laterite/30 bg-laterite/5 px-4 py-3 text-sm text-laterite">
+                    <div
+                      role="alert"
+                      className="mt-4 rounded-xl border border-laterite/30 bg-laterite/5 px-4 py-3 text-sm text-laterite"
+                    >
                       {error}
                     </div>
                   )}
@@ -195,7 +183,7 @@ function ContactPage() {
                   <button
                     type="submit"
                     disabled={loading}
-                    className="mt-6 inline-flex items-center rounded-full bg-gold px-8 py-3.5 text-sm font-bold text-ink transition-all duration-300 hover:-translate-y-0.5 hover:shadow-lg disabled:opacity-60 disabled:hover:translate-y-0"
+                    className="btn btn-primary mt-8 disabled:pointer-events-none disabled:opacity-60"
                   >
                     {loading ? "Sending..." : "Send enquiry"}
                   </button>
@@ -203,7 +191,7 @@ function ContactPage() {
               )}
 
               {/* Map */}
-              <div className="mt-8 overflow-hidden rounded-2xl border border-hairline">
+              <div className="mt-8 overflow-hidden rounded-[1.5rem] border border-hairline">
                 <iframe
                   title="Quilon Educational Consultancy — Trivandrum Branch"
                   src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3945.7!2d76.955!3d8.488!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zOMKwMjknMTYuOCJOIDc2wrA1NzE4LjAiRQ!5e0!3m2!1sen!2sin!4v1700000000000"
@@ -219,101 +207,70 @@ function ContactPage() {
             </div>
 
             {/* Contact details sidebar */}
-            <div className="space-y-8">
-              {/* Quick contact */}
-              <div className="rounded-2xl border border-hairline bg-offwhite p-8">
-                <h2 className="font-display text-lg font-extrabold text-brown">
-                  Quilon Educational Consultancy
-                </h2>
-                <p className="mt-1 text-xs text-muted-foreground">
-                  H.O: Ambalakara, Kottarakara
-                </p>
-
-                <div className="mt-6 space-y-4">
-                  <div className="flex items-start gap-3">
-                    <span className="mt-0.5 flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-gold/10 text-sm font-bold text-gold">
-                      ph
-                    </span>
-                    <div>
-                      <a
-                        href="tel:+919497771392"
-                        className="block text-sm font-semibold text-brown hover:text-gold"
-                      >
-                        9497 771 392
-                      </a>
-                      <a
-                        href="tel:+919207774401"
-                        className="block text-sm font-semibold text-brown hover:text-gold"
-                      >
-                        9207 774 401
-                      </a>
-                    </div>
-                  </div>
-
-                  <div className="flex items-start gap-3">
-                    <span className="mt-0.5 flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-kerala/10 text-sm font-bold text-kerala">
-                      @
-                    </span>
-                    <a
-                      href="mailto:info@quilonconsultancy.com"
-                      className="text-sm font-semibold text-brown hover:text-kerala"
-                    >
-                      info@quilonconsultancy.com
-                    </a>
-                  </div>
-                </div>
+            <div className="space-y-10 lg:pl-8">
+              <div>
+                <p className="text-xs text-muted-foreground">Call the office</p>
+                <a
+                  href="tel:+919497771392"
+                  className="tnum mt-2 block font-display text-4xl text-brown transition-colors hover:text-ochre"
+                >
+                  9497 771 392
+                </a>
+                <a
+                  href="tel:+919207774401"
+                  className="tnum mt-1 block font-display text-4xl text-brown transition-colors hover:text-ochre"
+                >
+                  9207 774 401
+                </a>
+                <p className="mt-6 text-xs text-muted-foreground">Email</p>
+                <a
+                  href="mailto:info@quilonconsultancy.com"
+                  className="link-underline mt-2 inline-block text-base text-brown"
+                >
+                  info@quilonconsultancy.com
+                </a>
               </div>
 
-              {/* Branches */}
-              <div className="rounded-2xl border border-hairline bg-offwhite p-8">
-                <h3 className="text-xs font-bold uppercase tracking-[0.14em] text-muted-foreground">
-                  Branches
-                </h3>
-                <ul className="mt-5 space-y-5">
+              <div className="border-t border-hairline pt-8">
+                <h2 className="text-2xl">Visit us</h2>
+                <ul className="mt-5 space-y-5 text-sm">
                   {[
+                    { name: "Head office", address: "Ambalakara, Kottarakara" },
                     {
                       name: "Kottarakara",
-                      address:
-                        "Opposite Swayamwara Skills, Pulamon P.O, Kottarakara (Kollam)",
+                      address: "Opposite Swayamwara Skills, Pulamon P.O, Kottarakara (Kollam)",
+                    },
+                    {
+                      name: "Kollam",
+                      address: "Kollam, Kerala",
                     },
                     {
                       name: "Trivandrum",
                       address:
-                        "Near Ameya Collections, Vanross Road, Oottukuzhy Jn, Trivandrum, Kerala - 695001",
+                        "Near Ameya Collections, Vanross Road, Oottukuzhy Jn, Trivandrum, Kerala 695001",
+                    },
+                    {
+                      name: "Adimali",
+                      address: "Adimali, Idukki",
                     },
                   ].map((b) => (
-                    <li key={b.name}>
-                      <p className="text-sm font-bold text-brown">{b.name}</p>
-                      <p className="mt-1 text-xs leading-relaxed text-muted-foreground">
-                        {b.address}
-                      </p>
+                    <li key={b.name} className="grid grid-cols-[7rem_1fr] gap-4">
+                      <p className="font-semibold text-brown">{b.name}</p>
+                      <p className="leading-relaxed">{b.address}</p>
                     </li>
                   ))}
                 </ul>
               </div>
 
-              {/* Hours */}
-              <div className="rounded-2xl border border-hairline bg-offwhite p-8">
-                <h3 className="text-xs font-bold uppercase tracking-[0.14em] text-muted-foreground">
-                  Working hours
-                </h3>
-                <p className="mt-4 text-sm text-brown">
-                  Monday – Saturday
-                </p>
-                <p className="text-sm text-muted-foreground">
-                  9:30 AM – 6:30 PM
-                </p>
-                <p className="mt-3 text-xs text-muted-foreground">
-                  Closed on Sundays and public holidays
-                </p>
+              <div className="border-t border-hairline pt-8 text-sm">
+                <h2 className="text-2xl">Hours</h2>
+                <p className="mt-4 text-brown">Monday – Saturday, 9:30 am – 6:30 pm</p>
+                <p className="mt-1">Closed on Sundays and public holidays</p>
               </div>
 
               {/* Back to home */}
-              <Link
-                to="/"
-                className="inline-flex items-center gap-2 rounded-full border border-hairline px-6 py-3 text-sm font-bold text-brown transition-all duration-300 hover:border-gold hover:text-gold"
-              >
-                &larr; Back to home
+              <Link to="/" className="link-underline inline-block text-sm font-semibold text-brown">
+                ← Back to home
               </Link>
             </div>
           </div>

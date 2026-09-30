@@ -22,16 +22,13 @@ export const Route = createFileRoute("/districts/$slug")({
   errorComponent: () => (
     <div className="flex min-h-screen items-center justify-center bg-ivory px-4">
       <div className="max-w-md text-center">
-        <h1 className="text-7xl font-display font-extrabold text-brown">404</h1>
-        <h2 className="mt-4 text-xl font-semibold text-brown">District not found</h2>
+        <p className="font-mal text-2xl text-ochre">വഴി തെറ്റി</p>
+        <h1 className="mt-4 text-5xl">District not found</h1>
         <p className="mt-2 text-sm text-muted-foreground">
           We don't have a page for that district yet.
         </p>
         <div className="mt-6">
-          <Link
-            to="/"
-            className="inline-flex items-center rounded-full bg-brown px-6 py-3 text-sm font-bold text-offwhite transition-colors hover:bg-ink"
-          >
+          <Link to="/" className="btn btn-primary">
             Go home
           </Link>
         </div>
@@ -39,6 +36,13 @@ export const Route = createFileRoute("/districts/$slug")({
     </div>
   ),
 });
+
+const typeTone: Record<string, string> = {
+  Government: "bg-brown text-offwhite",
+  Aided: "bg-gold/40 text-ink",
+  Autonomous: "border border-brown/30 text-brown",
+  Private: "bg-offwhite text-brown/80",
+};
 
 function DistrictPage() {
   const { slug } = Route.useParams();
@@ -49,141 +53,114 @@ function DistrictPage() {
   return (
     <div className="min-h-screen bg-ivory">
       <Nav />
-      <main>
-        {/* Header */}
-        <section className="bg-offwhite pt-32 pb-16 sm:pt-40 sm:pb-20">
-          <div className="mx-auto max-w-5xl px-5 sm:px-8">
-            <span className="eyebrow flex items-center gap-3 text-kerala">
-              <span className="gold-rule" />
-              District coverage
-            </span>
-            <h1 className="mt-5 text-[clamp(2.4rem,5vw,4rem)] text-brown">
-              {district.name}
-            </h1>
-            <p className="mt-5 max-w-2xl text-base leading-relaxed text-muted-foreground sm:text-lg">
-              {district.tagline}
-            </p>
-          </div>
-        </section>
-
-        {/* Stats bar */}
-        <section className="border-b border-hairline bg-ivory py-8">
-          <div className="mx-auto max-w-5xl px-5 sm:px-8">
-            <div className="grid grid-cols-2 gap-8 text-center">
+      <main id="main">
+        <section className="pb-16 pt-32 sm:pb-20 sm:pt-40">
+          <div className="mx-auto max-w-[1320px] px-5 sm:px-8">
+            <Link to="/" hash="districts" className="link-underline text-sm font-medium text-brown">
+              ← All districts
+            </Link>
+            <div className="mt-10 grid gap-10 lg:grid-cols-[1.4fr_0.6fr] lg:items-end">
               <div>
-                <span className="font-display text-3xl font-extrabold text-brown sm:text-4xl">
-                  {district.institutions}
-                </span>
-                <p className="mt-1 text-xs font-semibold uppercase tracking-[0.12em] text-muted-foreground">
-                  Institutions
+                <p className="eyebrow flex items-center gap-3 text-ochre">
+                  <span className="gold-rule" />
+                  District guide
                 </p>
+                <h1 className="mt-6 text-[clamp(3rem,7vw,6rem)]">{district.name}</h1>
+                <p className="mt-6 max-w-2xl text-lg leading-relaxed">{district.tagline}</p>
               </div>
-              <div>
-                <span className="font-display text-3xl font-extrabold text-gold sm:text-4xl">
-                  {district.courseCount}
-                </span>
-                <p className="mt-1 text-xs font-semibold uppercase tracking-[0.12em] text-muted-foreground">
-                  Courses
-                </p>
-              </div>
+              <dl className="grid grid-cols-2 border-t border-hairline">
+                <div className="pr-4 pt-5">
+                  <dt className="text-sm">Institutions</dt>
+                  <dd className="tnum mt-1 font-display text-5xl text-brown">
+                    {district.institutions}
+                  </dd>
+                </div>
+                <div className="border-l border-hairline pl-6 pt-5">
+                  <dt className="text-sm">Courses</dt>
+                  <dd className="tnum mt-1 font-display text-5xl text-ochre">
+                    {district.courseCount}
+                  </dd>
+                </div>
+              </dl>
             </div>
           </div>
         </section>
 
-        {/* Course category sections */}
-        {district.categories.map((cat, catIdx) => (
-          <section
-            key={cat.name}
-            className="border-b border-hairline py-14 sm:py-20"
-            style={{
-              backgroundColor:
-                catIdx % 2 === 0
-                  ? "var(--color-ivory)"
-                  : "var(--color-offwhite)",
-            }}
-          >
-            <div className="mx-auto max-w-5xl px-5 sm:px-8">
-              <div className="flex items-baseline gap-4">
-                <span className="font-display text-5xl font-extrabold text-gold/25">
-                  {String(catIdx + 1).padStart(2, "0")}
-                </span>
-                <h2 className="text-[clamp(1.5rem,3vw,2.2rem)] text-brown">
-                  {cat.name}
-                </h2>
-              </div>
+        <section className="bg-paper-deep py-20 sm:py-28">
+          <div className="mx-auto max-w-[1320px] space-y-20 px-5 sm:px-8">
+            {district.categories.map((cat, catIdx) => (
+              <div key={cat.name} className="grid gap-8 lg:grid-cols-[0.35fr_0.65fr] lg:gap-16">
+                <div className="lg:sticky lg:top-28 lg:self-start">
+                  <span className="font-display text-5xl font-light italic text-ochre">
+                    {String(catIdx + 1).padStart(2, "0")}
+                  </span>
+                  <h2 className="mt-3 text-[clamp(1.8rem,3vw,2.6rem)]">{cat.name}</h2>
+                  <p className="mt-2 text-sm">{cat.colleges.length} colleges listed</p>
+                </div>
 
-              <div className="mt-8 divide-y divide-hairline rounded-sm border border-hairline bg-offwhite">
-                {cat.colleges.map((college, i) => (
-                  <Link
-                    key={college.name + i}
-                    to="/book-consultation"
-                    search={{ district: district.slug }}
-                    className="flex flex-col gap-2 px-6 py-5 transition-colors hover:bg-ivory sm:flex-row sm:items-center sm:justify-between sm:gap-4"
-                  >
-                    <div className="min-w-0">
-                      <h3 className="text-base font-bold text-brown">
-                        {college.name}
-                      </h3>
-                      {college.note && (
-                        <p className="mt-0.5 text-xs text-muted-foreground">
-                          {college.note}
-                        </p>
-                      )}
-                    </div>
-                    <span
-                      className="shrink-0 rounded-full px-3 py-1 text-[11px] font-bold tracking-wide"
-                      style={{
-                        backgroundColor:
-                          college.type === "Government"
-                            ? "oklch(0.42 0.075 155 / 0.1)"
-                            : college.type === "Aided"
-                              ? "oklch(0.74 0.095 82 / 0.1)"
-                              : college.type === "Autonomous"
-                                ? "oklch(0.52 0.115 42 / 0.1)"
-                                : "oklch(0.18 0.008 60 / 0.06)",
-                        color:
-                          college.type === "Government"
-                            ? "var(--kerala)"
-                            : college.type === "Aided"
-                              ? "var(--gold)"
-                              : college.type === "Autonomous"
-                                ? "var(--laterite)"
-                                : "var(--brown)",
-                      }}
-                    >
-                      {college.type}
-                    </span>
-                  </Link>
-                ))}
+                <ul className="border-t border-hairline">
+                  {cat.colleges.map((college, i) => (
+                    <li key={college.name + i} className="border-b border-hairline">
+                      <Link
+                        to="/book-consultation"
+                        search={{ district: district.slug }}
+                        className="group flex flex-col gap-2 py-5 sm:flex-row sm:items-center sm:justify-between sm:gap-6"
+                      >
+                        <span className="min-w-0">
+                          <span className="block font-display text-xl text-brown transition-colors group-hover:text-ochre">
+                            {college.name}
+                          </span>
+                          {college.note && (
+                            <span className="mt-1 block text-sm">{college.note}</span>
+                          )}
+                        </span>
+                        <span className="flex shrink-0 items-center gap-4">
+                          <span
+                            className={`rounded-md px-2.5 py-1 text-xs font-medium ${typeTone[college.type]}`}
+                          >
+                            {college.type}
+                          </span>
+                          <span
+                            aria-hidden="true"
+                            className="hidden text-brown opacity-0 transition-opacity group-hover:opacity-100 sm:inline"
+                          >
+                            →
+                          </span>
+                        </span>
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
               </div>
-            </div>
-          </section>
-        ))}
+            ))}
+          </div>
+        </section>
 
-        {/* CTA */}
-        <section className="py-16 sm:py-24">
-          <div className="mx-auto max-w-5xl px-5 sm:px-8 text-center">
-            <h2 className="text-[clamp(1.8rem,3.5vw,2.8rem)] text-brown">
-              Get help applying in {district.name}
+        <section className="py-24 sm:py-32">
+          <div className="mx-auto max-w-[1320px] px-5 sm:px-8">
+            <h2 className="max-w-4xl text-[clamp(2.3rem,4.8vw,4.2rem)]">
+              Applying in {district.name}?{" "}
+              <em className="font-light italic text-ochre">We'll handle the paperwork.</em>
             </h2>
-            <p className="mt-4 max-w-xl mx-auto text-sm leading-relaxed text-muted-foreground sm:text-base">
-              From document verification to deadline tracking — our advisors
-              handle the entire application process for{" "}
-              {district.name} students.
+            <p className="mt-6 max-w-xl text-base leading-relaxed">
+              From document verification to deadline tracking — our advisors handle the entire
+              application process for {district.name} students.
             </p>
-            <div className="mt-8 flex flex-wrap justify-center gap-4">
+            <div className="mt-10 flex flex-wrap items-center gap-8">
               <Link
                 to="/book-consultation"
                 search={{ district: district.slug }}
-                className="inline-flex items-center rounded-full bg-brown px-8 py-4 text-sm font-bold text-offwhite transition-all duration-300 hover:-translate-y-0.5 hover:bg-ink"
+                className="btn btn-primary"
               >
                 Talk to an advisor
+                <span aria-hidden="true">→</span>
               </Link>
               <Link
                 to="/"
-                className="inline-flex items-center rounded-full border border-hairline px-8 py-4 text-sm font-bold text-brown transition-all duration-300 hover:border-gold hover:text-gold"
+                hash="districts"
+                className="link-underline text-sm font-semibold text-brown"
               >
-                Back to map
+                Back to the map
               </Link>
             </div>
           </div>
