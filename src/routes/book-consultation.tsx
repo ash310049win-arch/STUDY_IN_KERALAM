@@ -3,7 +3,7 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { Nav } from "@/components/site/Nav";
 import { Footer } from "@/components/site/Footer";
 import { sendConsultation } from "@/server-fns/mail";
-import bgImg from "@/assets/final-cta.jpg";
+import bgImg from "@/assets/hero-consultation.jpg";
 
 const districts = [
   "Thiruvananthapuram",
@@ -45,7 +45,13 @@ const studyLevels = [
   "Working professional exploring further study",
 ];
 
-const institutionTypes = ["Government", "Aided", "Private", "Autonomous", "No preference"];
+const institutionTypes = [
+  "Government",
+  "Aided",
+  "Private",
+  "Autonomous",
+  "No preference",
+];
 
 export const Route = createFileRoute("/book-consultation")({
   head: () => ({
@@ -66,7 +72,7 @@ export const Route = createFileRoute("/book-consultation")({
 function BookConsultationPage() {
   const prefillDistrict =
     typeof window !== "undefined"
-      ? (new URLSearchParams(window.location.search).get("district") ?? "")
+      ? new URLSearchParams(window.location.search).get("district") ?? ""
       : "";
   const [submitted, setSubmitted] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -87,14 +93,20 @@ function BookConsultationPage() {
   });
 
   const toggleDistrict = (d: string) => {
-    setSelectedDistricts((prev) => (prev.includes(d) ? prev.filter((x) => x !== d) : [...prev, d]));
+    setSelectedDistricts((prev) =>
+      prev.includes(d) ? prev.filter((x) => x !== d) : [...prev, d],
+    );
   };
 
   const toggleField = (f: string) => {
-    setSelectedFields((prev) => (prev.includes(f) ? prev.filter((x) => x !== f) : [...prev, f]));
+    setSelectedFields((prev) =>
+      prev.includes(f) ? prev.filter((x) => x !== f) : [...prev, f],
+    );
   };
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>,
+  ) => {
     setFormData((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   };
 
@@ -118,7 +130,11 @@ function BookConsultationPage() {
 
       setSubmitted(true);
     } catch (err) {
-      setError(err instanceof Error ? err.message : "Failed to send. Please try again or call us.");
+      setError(
+        err instanceof Error
+          ? err.message
+          : "Failed to send. Please try again or call us.",
+      );
     } finally {
       setLoading(false);
     }
@@ -127,56 +143,73 @@ function BookConsultationPage() {
   return (
     <div className="min-h-screen bg-ivory">
       <Nav />
-      <main id="main" className="pb-24 pt-28 sm:pb-32 sm:pt-36">
-        <div className="mx-auto grid max-w-[1320px] gap-14 px-5 sm:px-8 lg:grid-cols-[0.8fr_1.2fr] lg:gap-20">
-          <aside className="lg:sticky lg:top-28 lg:self-start">
-            <p className="eyebrow flex items-center gap-3 text-ochre">
+      <main className="relative min-h-screen pt-24 pb-20 sm:pt-32 sm:pb-28">
+        {/* Background */}
+        <div className="absolute inset-0 overflow-hidden">
+          <img
+            src={bgImg}
+            alt=""
+            aria-hidden="true"
+            className="h-full w-full object-cover object-center"
+          />
+          <div
+            className="absolute inset-0"
+            style={{
+              background:
+                "linear-gradient(to top, oklch(0.32 0.045 55 / 0.85) 0%, oklch(0.32 0.045 55 / 0.4) 50%, oklch(0.32 0.045 55 / 0.1) 100%)",
+            }}
+          />
+        </div>
+
+        <div className="relative z-10 mx-auto max-w-4xl px-5 sm:px-8">
+          {/* Header */}
+          <div className="mb-10 text-center">
+            <span className="eyebrow inline-flex items-center gap-3 text-gold">
               <span className="gold-rule" />
               Free consultation
-            </p>
-            <h1 className="mt-6 text-[clamp(2.6rem,5vw,4.4rem)]">
-              Tell us where you are.{" "}
-              <em className="font-light italic text-ochre">We'll map the rest.</em>
+              <span className="gold-rule" />
+            </span>
+            <h1 className="mt-5 text-[clamp(2rem,4.5vw,3.5rem)] text-ivory">
+              Book your consultation.
             </h1>
-            <p className="mt-6 max-w-md text-base leading-relaxed">
-              A few details help us come prepared — which colleges fit your marks, what the fees
-              look like and which deadlines are closest.
+            <p
+              className="mt-4 text-sm leading-relaxed sm:text-base"
+              style={{ color: "oklch(0.965 0.012 85 / 0.75)" }}
+            >
+              Tell us about yourself — we'll match you to the right colleges and
+              handle the application from there.
             </p>
-            <img
-              src={bgImg}
-              alt="A student on a call with an advisor, taking notes at her desk"
-              width={1920}
-              height={1280}
-              className="mt-10 hidden aspect-[4/3] w-full rounded-[1.5rem] rounded-tr-[5rem] object-cover lg:block"
-            />
-            <ol className="mt-10 space-y-4 border-t border-hairline pt-8 text-sm">
-              {[
-                "We call you back within one working day.",
-                "A 30–45 minute sit-down, in person or on a call.",
-                "You leave with a shortlist and a deadline plan. No fee until you decide.",
-              ].map((t, i) => (
-                <li key={t} className="grid grid-cols-[2rem_1fr]">
-                  <span className="font-display italic text-ochre">{i + 1}.</span>
-                  <span>{t}</span>
-                </li>
-              ))}
-            </ol>
-          </aside>
+          </div>
 
-          <div className="rounded-[2rem] bg-offwhite p-6 shadow-[0_30px_60px_-40px_oklch(0.3_0.042_52/0.45)] sm:p-10">
+          {/* Form card */}
+          <div
+            className="rounded-2xl p-6 sm:p-10"
+            style={{
+              backgroundColor: "oklch(0.985 0.005 85 / 0.95)",
+              backdropFilter: "blur(12px)",
+              border: "1px solid oklch(0.18 0.008 60 / 0.08)",
+            }}
+          >
             {submitted ? (
               <div className="py-12 text-center">
-                <p className="font-mal text-2xl text-ochre">നന്ദി</p>
-                <h2 className="mt-4 text-4xl">Request received.</h2>
+                <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-kerala/10">
+                  <span className="text-2xl text-kerala">&#10003;</span>
+                </div>
+                <h2 className="mt-6 font-display text-2xl font-extrabold text-brown">
+                  Request received
+                </h2>
                 <p className="mt-3 max-w-md mx-auto text-sm leading-relaxed text-muted-foreground">
-                  We'll get back to you within one working day. Check your email for a confirmation,
-                  or call us directly at{" "}
+                  We'll get back to you within one working day. Check your
+                  email for a confirmation, or call us directly at{" "}
                   <a href="tel:+919497771392" className="font-semibold text-brown hover:text-gold">
                     9497 771 392
                   </a>
                   .
                 </p>
-                <Link to="/" className="btn btn-primary mt-8">
+                <Link
+                  to="/"
+                  className="mt-8 inline-flex items-center rounded-full bg-brown px-7 py-3 text-sm font-bold text-offwhite transition-all duration-300 hover:-translate-y-0.5 hover:bg-ink"
+                >
                   Back to home
                 </Link>
               </div>
@@ -234,9 +267,7 @@ function BookConsultationPage() {
                     >
                       <option value="">Select...</option>
                       {studyLevels.map((l) => (
-                        <option key={l} value={l}>
-                          {l}
-                        </option>
+                        <option key={l} value={l}>{l}</option>
                       ))}
                     </select>
                   </Field>
@@ -254,9 +285,9 @@ function BookConsultationPage() {
 
                 {/* Districts multi-select */}
                 <div className="mt-6">
-                  <p className="mb-3 block text-sm font-semibold text-brown">
+                  <label className="mb-2 block text-xs font-bold uppercase tracking-[0.12em] text-muted-foreground">
                     Which district(s) are you interested in?
-                  </p>
+                  </label>
                   <div className="flex flex-wrap gap-2">
                     {districts.map((d) => {
                       const active = selectedDistricts.includes(d);
@@ -265,8 +296,11 @@ function BookConsultationPage() {
                           key={d}
                           type="button"
                           onClick={() => toggleDistrict(d)}
-                          aria-pressed={active}
-                          className={`${chipClass} ${active ? chipOn : chipOff}`}
+                          className={`rounded-full px-3.5 py-1.5 text-xs font-bold transition-all duration-200 ${
+                            active
+                              ? "bg-gold text-ink"
+                              : "border border-hairline text-muted-foreground hover:border-gold hover:text-brown"
+                          }`}
                         >
                           {d}
                         </button>
@@ -277,9 +311,9 @@ function BookConsultationPage() {
 
                 {/* Fields multi-select */}
                 <div className="mt-6">
-                  <p className="mb-3 block text-sm font-semibold text-brown">
+                  <label className="mb-2 block text-xs font-bold uppercase tracking-[0.12em] text-muted-foreground">
                     Field of study / course interest
-                  </p>
+                  </label>
                   <div className="flex flex-wrap gap-2">
                     {fields.map((f) => {
                       const active = selectedFields.includes(f);
@@ -288,8 +322,11 @@ function BookConsultationPage() {
                           key={f}
                           type="button"
                           onClick={() => toggleField(f)}
-                          aria-pressed={active}
-                          className={`${chipClass} ${active ? chipOn : chipOff}`}
+                          className={`rounded-full px-3.5 py-1.5 text-xs font-bold transition-all duration-200 ${
+                            active
+                              ? "bg-kerala text-offwhite"
+                              : "border border-hairline text-muted-foreground hover:border-kerala hover:text-kerala"
+                          }`}
                         >
                           {f}
                         </button>
@@ -309,9 +346,7 @@ function BookConsultationPage() {
                     >
                       <option value="">No preference</option>
                       {institutionTypes.map((t) => (
-                        <option key={t} value={t}>
-                          {t}
-                        </option>
+                        <option key={t} value={t}>{t}</option>
                       ))}
                     </select>
                   </Field>
@@ -345,10 +380,7 @@ function BookConsultationPage() {
 
                 {/* Error */}
                 {error && (
-                  <div
-                    role="alert"
-                    className="mt-6 rounded-xl border border-laterite/30 bg-laterite/5 px-4 py-3 text-sm text-laterite"
-                  >
+                  <div className="mt-5 rounded-lg border border-laterite/30 bg-laterite/5 px-4 py-3 text-sm text-laterite">
                     {error}
                   </div>
                 )}
@@ -358,11 +390,16 @@ function BookConsultationPage() {
                   <button
                     type="submit"
                     disabled={loading}
-                    className="btn btn-primary disabled:pointer-events-none disabled:opacity-60"
+                    className="inline-flex items-center rounded-full bg-gold px-8 py-3.5 text-sm font-bold text-ink transition-all duration-300 hover:-translate-y-0.5 hover:shadow-lg disabled:opacity-60 disabled:hover:translate-y-0"
                   >
                     {loading ? "Sending..." : "Book my consultation"}
                   </button>
-                  <p className="text-xs">Free — no obligation until you decide to go ahead.</p>
+                  <p
+                    className="text-xs"
+                    style={{ color: "oklch(0.46 0.012 70 / 0.7)" }}
+                  >
+                    Free — no obligation until you decide to go ahead.
+                  </p>
                 </div>
               </form>
             )}
@@ -377,12 +414,7 @@ function BookConsultationPage() {
 /* ─── helpers ─── */
 
 const inputClass =
-  "w-full rounded-xl border border-hairline bg-paper/60 px-4 py-3.5 text-[0.95rem] text-brown outline-none transition-[border-color,background-color,box-shadow] placeholder:text-muted-foreground/60 hover:border-brown/30 focus:border-brown focus:bg-offwhite focus:ring-4 focus:ring-gold/25";
-
-const chipClass =
-  "rounded-full border px-4 py-2 text-sm font-medium transition-[background-color,border-color,color] duration-200 active:scale-[0.97]";
-const chipOn = "border-brown bg-brown text-offwhite";
-const chipOff = "border-hairline text-brown/80 hover:border-brown/40 hover:text-brown";
+  "w-full rounded-lg border border-hairline bg-white px-4 py-3 text-sm text-brown outline-none transition-colors focus:border-gold focus:ring-1 focus:ring-gold/30";
 
 function Field({
   label,
@@ -395,7 +427,7 @@ function Field({
 }) {
   return (
     <div>
-      <label className="mb-2 block text-sm font-semibold text-brown">
+      <label className="mb-1.5 block text-xs font-bold uppercase tracking-[0.12em] text-muted-foreground">
         {label}
         {required && <span className="ml-0.5 text-laterite">*</span>}
       </label>
@@ -416,8 +448,8 @@ function ToggleField({
   onChange: (v: boolean) => void;
 }) {
   return (
-    <div className="flex items-center justify-between gap-4 rounded-xl border border-hairline bg-paper/60 px-4 py-3.5">
-      <label htmlFor={name} className="text-sm text-brown">
+    <div className="flex items-center justify-between rounded-lg border border-hairline bg-white px-4 py-3">
+      <label htmlFor={name} className="text-sm font-semibold text-brown">
         {label}
       </label>
       <button
@@ -427,7 +459,7 @@ function ToggleField({
         aria-checked={checked}
         onClick={() => onChange(!checked)}
         className={`relative inline-flex h-6 w-11 shrink-0 cursor-pointer rounded-full transition-colors duration-200 ${
-          checked ? "bg-brown" : "bg-brown/20"
+          checked ? "bg-kerala" : "bg-hairline"
         }`}
       >
         <span

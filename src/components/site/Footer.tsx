@@ -1,76 +1,114 @@
 import { Link } from "@tanstack/react-router";
 
-const explore = [
-  ["why", "Why us"],
-  ["process", "How it works"],
-  ["partners", "Partner colleges"],
-  ["districts", "Districts"],
-  ["proof", "Students"],
-] as const;
-
-const branches = [
-  ["Kottarakara", "Opposite Swayamwara Skills, Pulamon P.O, Kottarakara, Kollam"],
-  ["Kollam", "Kollam, Kerala"],
-  ["Trivandrum", "Near Ameya Collections, Vanross Road, Oottukuzhy Jn, Thiruvananthapuram 695001"],
-  ["Adimali", "Adimali, Idukki"],
-] as const;
-
 export function Footer() {
   return (
-    <footer className="bg-ink text-sm text-offwhite/60">
-      <div className="mx-auto max-w-[1320px] px-5 sm:px-8">
-        <div className="grid gap-12 border-t border-offwhite/15 py-14 md:grid-cols-[1.3fr_0.7fr_1.4fr]">
-          <div>
-            <Link to="/" className="font-display text-2xl text-offwhite">
-              Study in <em className="italic text-gold">Keralam</em>
-            </Link>
-            <p className="mt-2 text-xs text-offwhite/50">
-              by Quilon Educational Consultancy · <span className="font-mal">കേരളം</span>
+    <footer className="bg-ink py-14 text-offwhite/70">
+      <div className="mx-auto max-w-7xl px-5 sm:px-8">
+        <div className="grid gap-10 md:grid-cols-4">
+          {/* Brand */}
+          <div className="md:col-span-2">
+            <p className="font-display text-xl font-extrabold text-offwhite">
+              Study in Keralam
             </p>
-            <p className="mt-6 max-w-xs leading-relaxed">
-              Admission guidance for students across Kerala — entrance exams, applications,
-              documents and allotment, handled with you.
+            <p className="mt-1 text-xs font-bold uppercase tracking-[0.18em] text-gold">
+              Quilon Educational Consultancy
+            </p>
+            <p className="mt-5 max-w-sm text-sm leading-relaxed">
+              Admission guidance for students across Kerala — entrance exams,
+              applications, documents and allotment, handled with you.
             </p>
           </div>
 
-          <nav aria-label="Footer">
-            <p className="text-xs text-offwhite/40">On this site</p>
-            <ul className="mt-4 space-y-2.5">
-              {explore.map(([hash, label]) => (
-                <li key={hash}>
-                  <Link to="/" hash={hash} className="transition-colors hover:text-gold">
-                    {label}
-                  </Link>
-                </li>
-              ))}
-              <li>
-                <Link to="/contact" className="transition-colors hover:text-gold">
-                  Contact
-                </Link>
-              </li>
-            </ul>
-          </nav>
-
+          {/* Explore */}
           <div>
-            <p className="text-xs text-offwhite/40">Branches</p>
-            <ul className="mt-4 space-y-5">
-              {branches.map(([name, addr]) => (
-                <li key={name}>
-                  <p className="font-semibold text-offwhite">{name}</p>
-                  <p className="mt-1 leading-relaxed">{addr}</p>
+            <h3 className="text-xs font-bold uppercase tracking-[0.16em] text-offwhite">
+              Explore
+            </h3>
+            <ul className="mt-4 space-y-2.5 text-sm">
+              {[
+                ["#why", "Why Quilon"],
+                ["#process", "Our process"],
+                ["#districts", "Districts"],
+                ["#proof", "Results"],
+              ].map(([href, label]) => (
+                <li key={href}>
+                  <a href={href} className="transition-colors hover:text-gold">
+                    {label}
+                  </a>
                 </li>
               ))}
+            </ul>
+          </div>
+
+          {/* Contact */}
+          <div>
+            <h3 className="text-xs font-bold uppercase tracking-[0.16em] text-offwhite">
+              Contact
+            </h3>
+            <ul className="mt-4 space-y-2.5 text-sm">
               <li>
-                <p className="font-semibold text-offwhite">Head office</p>
-                <p className="mt-1">Ambalakara, Kottarakara</p>
+                <span className="text-offwhite/50 text-xs font-semibold uppercase tracking-wider">H.O</span>
+                <br />
+                Ambalakara, Kottarakara
               </li>
+              <li>
+                <a href="tel:+919497771392" className="hover:text-gold">
+                  9497 771 392
+                </a>
+                {" / "}
+                <a href="tel:+919207774401" className="hover:text-gold">
+                  9207 774 401
+                </a>
+              </li>
+              <li>
+                <a href="mailto:info@quilonconsultancy.com" className="hover:text-gold">
+                  info@quilonconsultancy.com
+                </a>
+              </li>
+              <li className="text-offwhite/50">Mon–Sat · 9:30am to 6:30pm</li>
             </ul>
           </div>
         </div>
 
-        <div className="flex flex-wrap items-center justify-between gap-4 border-t border-offwhite/15 py-6 text-xs">
-          <p>&copy; {new Date().getFullYear()} Quilon Educational Consultancy</p>
-          <div className="flex gap-6">
+        {/* Branches */}
+        <div className="mt-10 border-t border-offwhite/15 pt-8">
+          <h3 className="text-xs font-bold uppercase tracking-[0.16em] text-offwhite">
+            Our branches
+          </h3>
+            <div className="mt-4 grid gap-4 text-xs leading-relaxed sm:grid-cols-2">
+            <div>
+              <span className="font-bold text-gold">Kottarakara</span>
+              <p className="mt-1 text-offwhite/60">
+                Opposite Swayamwara Skills, Pulamon P.O, Kottarakara (Kollam)
+              </p>
+            </div>
+            <div>
+              <span className="font-bold text-gold">Kollam</span>
+              <p className="mt-1 text-offwhite/60">
+                Kollam, Kerala
+              </p>
+            </div>
+            <div>
+              <span className="font-bold text-gold">Trivandrum</span>
+              <p className="mt-1 text-offwhite/60">
+                Near Ameya Collections, Vanross Road, Oottukuzhy Jn, Trivandrum, Kerala - 695001
+              </p>
+            </div>
+            <div>
+              <span className="font-bold text-gold">Adimali</span>
+              <p className="mt-1 text-offwhite/60">
+                Adimali, Idukki
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div className="mt-12 flex flex-wrap items-center justify-between gap-4 border-t border-offwhite/15 pt-6 text-xs">
+          <p>&copy; {new Date().getFullYear()} Quilon Educational Consultancy.</p>
+          <div className="flex gap-5">
+            <Link to="/book-consultation" className="hover:text-gold">
+              Contact us
+            </Link>
             <Link to="/privacy" className="hover:text-gold">
               Privacy
             </Link>
@@ -78,7 +116,7 @@ export function Footer() {
               Terms
             </Link>
             <Link to="/refund" className="hover:text-gold">
-              Refunds
+              Refund
             </Link>
           </div>
         </div>

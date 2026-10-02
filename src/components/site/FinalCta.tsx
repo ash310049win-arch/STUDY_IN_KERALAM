@@ -2,65 +2,109 @@ import { Link } from "@tanstack/react-router";
 
 export function FinalCta() {
   return (
-    <section
-      id="contact"
-      className="relative overflow-hidden bg-ink pb-20 pt-24 text-offwhite/75 sm:pt-32"
-    >
-      <span
-        aria-hidden="true"
-        className="pointer-events-none absolute -bottom-16 right-0 select-none font-mal text-[clamp(8rem,22vw,20rem)] leading-none text-offwhite/[0.035]"
-      >
-        സ്വാഗതം
-      </span>
-      <div className="relative mx-auto max-w-[1320px] px-5 sm:px-8">
-        <p className="eyebrow flex items-center gap-3 text-gold">
-          <span className="gold-rule" />
-          Free first consultation
-        </p>
-        <h2 className="reveal mt-6 max-w-5xl text-[clamp(2.6rem,6.4vw,5.8rem)] text-offwhite">
-          Let's get your application{" "}
-          <em className="font-light italic text-gold">filed properly.</em>
-        </h2>
-
-        <div className="mt-14 grid gap-12 border-t border-offwhite/15 pt-10 lg:grid-cols-[1.2fr_1fr_1fr]">
+    <section id="contact" className="bg-offwhite py-20 sm:py-28">
+      <div className="mx-auto max-w-7xl px-5 sm:px-8">
+        <div className="grid items-start gap-12 lg:grid-cols-2">
+          {/* Left — copy + CTA */}
           <div>
-            <p className="max-w-md text-base leading-relaxed">
-              No obligation, no fee until you decide to go ahead — just a clear read on where you
-              stand and what happens next.
+            <span className="eyebrow flex items-center gap-3 text-kerala">
+              <span className="gold-rule" />
+              Contact us
+            </span>
+            <h2 className="mt-5 text-[clamp(2rem,4vw,3.4rem)] text-brown">
+              Let's get your application filed properly.
+            </h2>
+            <p className="mt-5 max-w-lg text-sm leading-relaxed text-muted-foreground sm:text-base">
+              One free consultation. No obligation, no fee until you decide to
+              go ahead — just a clear read on where you stand and what happens
+              next.
             </p>
-            <Link to="/book-consultation" className="btn btn-gold mt-8">
-              Book a consultation
-              <span aria-hidden="true">→</span>
-            </Link>
+
+            <div className="mt-8 flex flex-wrap items-center gap-4">
+              <Link
+                to="/book-consultation"
+                className="inline-flex items-center rounded-full bg-gold px-7 py-3.5 text-sm font-bold text-ink transition-transform hover:-translate-y-0.5"
+              >
+                Get in touch
+              </Link>
+              <a
+                href="tel:+919497771392"
+                className="inline-flex items-center gap-2 border-b-2 border-kerala pb-1 text-sm font-bold text-brown transition-colors hover:text-kerala"
+              >
+                9497 771 392
+              </a>
+            </div>
           </div>
 
-          <div>
-            <p className="text-xs text-offwhite/50">Call the office</p>
-            <a
-              href="tel:+919497771392"
-              className="tnum mt-2 block font-display text-3xl text-offwhite transition-colors hover:text-gold"
-            >
-              9497 771 392
-            </a>
-            <a
-              href="tel:+919207774401"
-              className="tnum mt-1 block font-display text-3xl text-offwhite transition-colors hover:text-gold"
-            >
-              9207 774 401
-            </a>
-            <p className="mt-3 text-sm">Mon–Sat · 9:30 am to 6:30 pm</p>
-          </div>
+          {/* Right — contact details card */}
+          <div className="rounded-2xl border border-hairline bg-ivory p-8 sm:p-10">
+            <h3 className="font-display text-sm font-extrabold uppercase tracking-[0.14em] text-brown">
+              Quilon Educational Consultancy
+            </h3>
+            <p className="mt-1 text-xs text-muted-foreground">
+              H.O: Ambalakara, Kottarakara, Kollam
+            </p>
 
-          <div>
-            <p className="text-xs text-offwhite/50">Write to us</p>
-            <a
-              href="mailto:info@quilonconsultancy.com"
-              className="link-underline mt-2 inline-block text-base text-offwhite"
-            >
-              info@quilonconsultancy.com
-            </a>
-            <p className="mt-6 text-xs text-offwhite/50">Head office</p>
-            <p className="mt-2 text-sm">Ambalakara, Kottarakara, Kollam</p>
+            <div className="mt-6 space-y-5">
+              {/* Phone */}
+              <div className="flex items-start gap-3">
+                <span className="mt-0.5 flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-gold/10 text-xs font-bold text-gold">
+                  ph
+                </span>
+                <div>
+                  <a
+                    href="tel:+919497771392"
+                    className="block text-sm font-semibold text-brown hover:text-gold"
+                  >
+                    9497 771 392
+                  </a>
+                  <a
+                    href="tel:+919207774401"
+                    className="block text-sm font-semibold text-brown hover:text-gold"
+                  >
+                    9207 774 401
+                  </a>
+                </div>
+              </div>
+
+              {/* Email */}
+              <div className="flex items-start gap-3">
+                <span className="mt-0.5 flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-kerala/10 text-xs font-bold text-kerala">
+                  @
+                </span>
+                <a
+                  href="mailto:info@quilonconsultancy.com"
+                  className="text-sm font-semibold text-brown hover:text-kerala"
+                >
+                  info@quilonconsultancy.com
+                </a>
+              </div>
+
+              {/* Branches */}
+              <div className="border-t border-hairline pt-5">
+                <p className="text-[11px] font-bold uppercase tracking-[0.14em] text-muted-foreground">
+                  Branches
+                </p>
+                <ul className="mt-3 space-y-2 text-xs leading-relaxed text-muted-foreground">
+                  <li>
+                    <span className="font-semibold text-brown">Kottarakara</span>{" "}
+                    — Opp. Swayamwara Skills, Pulamon P.O
+                  </li>
+                  <li>
+                    <span className="font-semibold text-brown">Kollam</span>{" "}
+                    — Kollam, Kerala
+                  </li>
+                  <li>
+                    <span className="font-semibold text-brown">Trivandrum</span>{" "}
+                    — Near Ameya Collections, Vanross Road, Oottukuzhy Jn, 695001
+                  </li>
+                  <li>
+                    <span className="font-semibold text-brown">Adimali</span>{" "}
+                    — Adimali, Idukki
+                  </li>
+                </ul>
+              </div>
+            </div>
           </div>
         </div>
       </div>

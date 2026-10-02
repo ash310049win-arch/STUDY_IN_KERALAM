@@ -30,7 +30,7 @@ function Index() {
   return (
     <div className="min-h-screen bg-ivory">
       <Nav />
-      <main id="main">
+      <main>
         <Hero />
         <WhyUs />
         <Process />
