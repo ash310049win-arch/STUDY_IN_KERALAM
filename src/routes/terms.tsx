@@ -1,6 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { Nav } from "@/components/site/Nav";
 import { Footer } from "@/components/site/Footer";
+import { headOffice } from "@/data/offices";
 
 export const Route = createFileRoute("/terms")({
   head: () => ({
@@ -211,8 +212,7 @@ function TermsPage() {
                   Quilon Educational Consultancy
                 </p>
                 <p className="mt-1">
-                  Opp. Swayamvara Silks, Pulamon Junction, Kottarakara, Kollam,
-                  Kerala &ndash; 691531
+                  {headOffice.label} &ndash; {headOffice.address}
                 </p>
                 <p className="mt-1">
                   Email:{" "}

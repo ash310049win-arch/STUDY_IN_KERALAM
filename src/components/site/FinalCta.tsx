@@ -1,4 +1,5 @@
 import { Link } from "@tanstack/react-router";
+import { headOffice, offices } from "@/data/offices";
 
 export function FinalCta() {
   return (
@@ -42,7 +43,7 @@ export function FinalCta() {
               Quilon Educational Consultancy
             </h3>
             <p className="mt-1 text-xs text-muted-foreground">
-              H.O: Ambalakara, Kottarakara, Kollam
+              {headOffice.label}: {headOffice.address}
             </p>
 
             <div className="mt-6 space-y-5">
@@ -80,28 +81,21 @@ export function FinalCta() {
                 </a>
               </div>
 
-              {/* Branches */}
+              {/* Offices */}
               <div className="border-t border-hairline pt-5">
                 <p className="text-[11px] font-bold uppercase tracking-[0.14em] text-muted-foreground">
-                  Branches
+                  Our Offices
                 </p>
                 <ul className="mt-3 space-y-2 text-xs leading-relaxed text-muted-foreground">
-                  <li>
-                    <span className="font-semibold text-brown">Kottarakara</span>{" "}
-                    — Opp. Swayamwara Skills, Pulamon P.O
-                  </li>
-                  <li>
-                    <span className="font-semibold text-brown">Kollam</span>{" "}
-                    — Kollam, Kerala
-                  </li>
-                  <li>
-                    <span className="font-semibold text-brown">Trivandrum</span>{" "}
-                    — Near Ameya Collections, Vanross Road, Oottukuzhy Jn, 695001
-                  </li>
-                  <li>
-                    <span className="font-semibold text-brown">Adimali</span>{" "}
-                    — Adimali, Idukki
-                  </li>
+                  {offices.map((office) => (
+                    <li key={office.name}>
+                      <span className="font-semibold text-brown">
+                        {office.name}
+                        {office.label ? ` (${office.label})` : ""}
+                      </span>{" "}
+                      &mdash; {office.short}
+                    </li>
+                  ))}
                 </ul>
               </div>
             </div>

@@ -1,4 +1,5 @@
 import { Link } from "@tanstack/react-router";
+import { headOffice, offices } from "@/data/offices";
 
 export function Footer() {
   return (
@@ -47,9 +48,11 @@ export function Footer() {
             </h3>
             <ul className="mt-4 space-y-2.5 text-sm">
               <li>
-                <span className="text-offwhite/50 text-xs font-semibold uppercase tracking-wider">H.O</span>
+                <span className="text-offwhite/50 text-xs font-semibold uppercase tracking-wider">
+                  {headOffice.label}
+                </span>
                 <br />
-                Ambalakara, Kottarakara
+                {headOffice.address}
               </li>
               <li>
                 <a href="tel:+919497771392" className="hover:text-gold">
@@ -70,36 +73,25 @@ export function Footer() {
           </div>
         </div>
 
-        {/* Branches */}
+        {/* Offices */}
         <div className="mt-10 border-t border-offwhite/15 pt-8">
           <h3 className="text-xs font-bold uppercase tracking-[0.16em] text-offwhite">
-            Our branches
+            Our offices
           </h3>
-            <div className="mt-4 grid gap-4 text-xs leading-relaxed sm:grid-cols-2">
-            <div>
-              <span className="font-bold text-gold">Kottarakara</span>
-              <p className="mt-1 text-offwhite/60">
-                Opposite Swayamwara Skills, Pulamon P.O, Kottarakara (Kollam)
-              </p>
-            </div>
-            <div>
-              <span className="font-bold text-gold">Kollam</span>
-              <p className="mt-1 text-offwhite/60">
-                Kollam, Kerala
-              </p>
-            </div>
-            <div>
-              <span className="font-bold text-gold">Trivandrum</span>
-              <p className="mt-1 text-offwhite/60">
-                Near Ameya Collections, Vanross Road, Oottukuzhy Jn, Trivandrum, Kerala - 695001
-              </p>
-            </div>
-            <div>
-              <span className="font-bold text-gold">Adimali</span>
-              <p className="mt-1 text-offwhite/60">
-                Adimali, Idukki
-              </p>
-            </div>
+          <div className="mt-4 grid gap-4 text-xs leading-relaxed sm:grid-cols-2 lg:grid-cols-3">
+            {offices.map((office) => (
+              <div key={office.name}>
+                <span className="font-bold text-gold">
+                  {office.name}
+                  {office.label ? (
+                    <span className="ml-1.5 text-[10px] font-semibold uppercase tracking-wider text-offwhite/40">
+                      {office.label}
+                    </span>
+                  ) : null}
+                </span>
+                <p className="mt-1 text-offwhite/60">{office.address}</p>
+              </div>
+            ))}
           </div>
         </div>
 

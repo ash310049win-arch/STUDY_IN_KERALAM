@@ -3,6 +3,7 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { Nav } from "@/components/site/Nav";
 import { Footer } from "@/components/site/Footer";
 import { sendContact } from "@/server-fns/mail";
+import { headOffice, offices } from "@/data/offices";
 
 export const Route = createFileRoute("/contact")({
   head: () => ({
@@ -11,7 +12,7 @@ export const Route = createFileRoute("/contact")({
       {
         name: "description",
         content:
-          "Get in touch with Quilon Educational Consultancy. Free consultation for Kerala college admissions — call, email, or visit our branches in Kottarakara, Kollam, Trivandrum or Adimali.",
+          "Get in touch with Quilon Educational Consultancy. Free consultation for Kerala college admissions — call, email, or visit our offices in Ampalakara, Kottarakara, Kollam, Anchal, Karunagappally, Adimali or Trivandrum.",
       },
     ],
   }),
@@ -226,7 +227,7 @@ function ContactPage() {
                   Quilon Educational Consultancy
                 </h2>
                 <p className="mt-1 text-xs text-muted-foreground">
-                  H.O: Ambalakara, Kottarakara
+                  {headOffice.label}: {headOffice.address}
                 </p>
 
                 <div className="mt-6 space-y-4">
@@ -264,36 +265,24 @@ function ContactPage() {
                 </div>
               </div>
 
-              {/* Branches */}
+              {/* Offices */}
               <div className="rounded-2xl border border-hairline bg-offwhite p-8">
                 <h3 className="text-xs font-bold uppercase tracking-[0.14em] text-muted-foreground">
-                  Branches
+                  Our Offices
                 </h3>
                 <ul className="mt-5 space-y-5">
-                  {[
-                    {
-                      name: "Kottarakara",
-                      address:
-                        "Opposite Swayamwara Skills, Pulamon P.O, Kottarakara (Kollam)",
-                    },
-                    {
-                      name: "Kollam",
-                      address: "Kollam, Kerala",
-                    },
-                    {
-                      name: "Trivandrum",
-                      address:
-                        "Near Ameya Collections, Vanross Road, Oottukuzhy Jn, Trivandrum, Kerala - 695001",
-                    },
-                    {
-                      name: "Adimali",
-                      address: "Adimali, Idukki",
-                    },
-                  ].map((b) => (
-                    <li key={b.name}>
-                      <p className="text-sm font-bold text-brown">{b.name}</p>
+                  {offices.map((office) => (
+                    <li key={office.name}>
+                      <p className="text-sm font-bold text-brown">
+                        {office.name}
+                        {office.label ? (
+                          <span className="ml-2 text-[10px] font-bold uppercase tracking-wider text-gold">
+                            {office.label}
+                          </span>
+                        ) : null}
+                      </p>
                       <p className="mt-1 text-xs leading-relaxed text-muted-foreground">
-                        {b.address}
+                        {office.address}
                       </p>
                     </li>
                   ))}
